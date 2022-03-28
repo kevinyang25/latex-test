@@ -21,8 +21,8 @@ jobs:
         set -e
 
         # configure git
-        git config --global user.name "David Haberthür"
-        git config --global user.email "email@davidhaberthuer.ch"
+        git config --global user.name "Yucheng Wang"
+        git config --global user.email "ychwang0331@gmail.com"
 
         # setup ssh
         mkdir ~/.ssh
