@@ -22,7 +22,7 @@ jobs:
         set -e
 
         # configure git
-        git config --global user.name "Yucheng Wang"
+        git config --global user.name "ychwang0331"
         git config --global user.email "ychwang0331@gmail.com"
 
         # setup ssh
