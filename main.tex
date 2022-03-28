@@ -1,59 +1,105 @@
-% Source: http://tex.stackexchange.com/a/150903/23931
-\documentclass{article}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{xcolor}
-\usepackage{fancyhdr}
-\usepackage{tgschola} % or any other font package you like
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amscd, amsthm, amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 40pt
+\marginparsep 10pt
+\topmargin -20pt
+\headsep 10pt
+\textheight 8.7in
+\textwidth 6.65in
+\linespread{1.2}
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[C]{%
-  \footnotesize\sffamily
-  \yourname\quad
-  web: \textcolor{blue}{\itshape\yourweb}\quad
-  \textcolor{blue}{\youremail}}
+\title{Linear model HW2 3.b}
+\author{Yucheng Wang yw6@andrew.cmu.edu}
+\date{}
 
-\newcommand{\soptitle}{Personal Statement}
-\newcommand{\yourname}{Yucheng Wang}
-\newcommand{\youremail}{yw6@andrew.cmu.edu}
-\newcommand{\yourweb}{https://ychwang0331.github.io/}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
-\newcommand{\statement}[1]{\par\medskip
-  \underline{\textcolor{blue}{\textbf{#1:}}}\space
-}
+\newcommand{\rr}{\mathbb{R}}
 
-\usepackage[
-  colorlinks,
-  breaklinks,
-  pdftitle={\yourname - \soptitle},
-  pdfauthor={\yourname},
-  unicode
-]{hyperref}
-\linespread{1.4}
+\newcommand{\al}{\alpha}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\aff}{aff}
+
 \begin{document}
 
-\begin{center}\LARGE\soptitle\\
-\large of \yourname\ (Statistics PhD applicant for Fall---2022)
-\end{center}
+\maketitle
 
-\hrule
-\vspace{1pt}
-\hrule height 1pt
+\section{Data}
+The dataset we use for this study come from Parker  (2003)  and  Coates  (2004), it contains prices for 72 wines from the 2000 vintage in Bordeaux. The variables are listed below. (The data are available in the fileBordeaux.csv, in the online supplement accompanying Sheather(2009).)
+$Y$=   Price = the price (in pounds sterling) of 12 bottles of wine
 
-\bigskip
+$x_1$=   ParkerPoints = Robert Parker’s rating of the wine (out of 100)
 
-My interests in Statistics stem from my very first Statistics and Mathematics courses and developed throughout my entire study and research experience. This kind of interests grew theoretically after taking the seminar about Stein's method held by Prof. Qiman Shao, which was the first time I learned limiting distribution theorems. During my undergraduate career, I explored Computational Statistics, especially on EM and MM algorithms. And now, as a Master's student at CMU who majored in Statistics, I am currently researching Reinforcement Learning theory, like differential privacy on TD($\lambda$) algorithm and High Dimensional Statistics. I am determined to pursue the Ph.D. degree in the Statistics program at University of Pittsburgh since I am very interested in continuing my research on Learning Theory and High Dimensional Statistics with professor Zhao Ren in your department. It would be my pleasure if I can work with him in this program. 
+$x_2$=   CoatesPoints = Clive Coates’ rating of the wine (out of 20)
 
-My past research experience was mainly focused on computational statistics. During my third year of undergraduate study, I undertook research on Zero-and-One Inflated Poisson (ZOIP) Regression Model. ZOIP distribution is a distribution with inflated numbers of 0 and 1, which is expressed by the stochastic representation of Poisson random variable and Binomial random variables. Due to the existence of the latent variables, the main challenge here was the estimation of the parameters in the ZOIP regression model. To be specific, in my research, I found mistakes in the work of W. Liu \textit{et al.} (2020), which was, in the Bayesian Inference part, they misused the Data Augmentation technique. I considered the regression model and used EM(expectation-maximization) algorithm and MM(majorization-minimization) algorithm to estimate the MLEs of the parameters of ZOIP regression model. Then, I fixed the mistakes in the work of W. Liu \textit{et al.} (2020) by deriving the Bayesian estimation of the parameters via Data Augmentation and Markov chain Monte Carlo method. It was rewarding being able to eventually help my supervisor to complete a chapter of his book \textit{Statistical Methods for Zero-Inflated Count Data}(unpublished). By this research experience, more importantly, I deepened my understanding of the convergence on the MM algorithm’s M-step and attempted to figure out better Q Functions that accelerate the convergence rate when tackling some parameters estimation problems.
+$x_3$=   P95andAbove = 1 (0) if the Parker score is 95 or above (otherwise)
 
-Motivated by the positive result of my first research experience, I became more and more interested in computational statistics. Supervised by professor Guoliang Tian, I discovered the potential ability of EM and MM algorithms by applying them in solving the discrete linear inverse problem. I managed to use the log-likelihood function of other distributions, such as Poisson Distribution, to replace the KL-divergence in the work Vardi \& Lee’s (1993, JRSSB, discussion paper) and solve the discrete linear inverse problem by both EM and MM algorithms. I also wielded these distributions to image restoration for better results and a faster convergence rate. This finding not only provide a new approach in solving the discrete linear inverse problem but also inspired me to use EM or MM algorithm in solving the non-linear problem in my future research, which might be used to solve many machine learning problems and could be more computationally efficient.
+$x_4$=   FirstGrowth = 1 (0) if the wine is a First Growth (otherwise)
 
-Besides my research on computational statistics, now at Carnegie Mellon University, I am also exploring more research areas, like optimization, high dimensional inference in genomics, and learning theory. In the course \textit{Statistical Genomics and High Dimensional Inference} taught by Kathryn Roeder, I found statistical genomics is a fascinating topic that I am interested in the statistical approaches in dealing with high dimensional data like Sparse PCA and Hierarchical Clustering. Currently, I am doing research on applying the differential privacy algorithm on the TD($\lambda$) algorithm based on the work of \textit{A Lyapunov Theory for Finite-Sample Guarantees of Asynchronous Q-Learning and TD-Learning Variants}, Zaiwei Chen \textit{et al.}(2021), the difficulty of this topic is due to the eligibility trace of the TD($\lambda$) algorithm, the noise we add to each term might make the finite sample convergence bound trivial. The differential privacy and reinforcement learning are highly related to statistics, this experience shows me more potential possibilities for my future research areas, and also shows me the importance of having a strong statistical and mathematical background, which solidified my desire to pursue graduate study in statistics. 
+$x5$=   CultWine = 1 (0) if the wine is a cult wine (otherwise)
 
-As a result of my coursework and research in statistical and mathematical methodology, I aim to dive deeper into the research of theoretical Statistics, High Dimensional Statistics, and Learning Theory. Professor Zhao Ren’s work on high dimensional statistics is inspirational and I would be very interested to work with him if there is a chance. I am excited to see the program offers me rigorous training on measure theory and can help me to find the very subfield that I want to dive deeper into.
+$x_6$=   Pomerol = 1 (0) if the wine is from Pomerol (otherwise)
 
-Upon graduation, I hope I can continue post-graduation as an assistant professor in Statistics and continue my research. As a Ph.D. student, I commit to maximizing my research contributions as we continue to ensure the Statistics Department at University of Pittsburgh remains one of the premier research Statistics Departments in the world.
+$x_7$=   VintageSuperstar = 1 (0) if the wine is a superstar (otherwise)
 
 
- 
+For $x_1$, $x_2$ the rating system of Parker(2003) and Coates  (2004) are different.\\ Parker's(2003) rating system is 100-point based and the scale is as follows:
+\begin{table}[h]
+\begin{tabular}{|l|l|}
+\hline
+96-100 points & Extraordinary              \\ \hline
+90-95 points  & Outstanding                \\ \hline
+80-89 points  & Above average to very good \\ \hline
+70-79 points  & Average                    \\ \hline
+50-69 points  & Below average to poor      \\ \hline
+\end{tabular}
+\end{table}
+Coates  (2004) rating system is 20-point based and the scale is as follows:\\\\\\\\\\\\\\\\\\
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|}
+\hline
+20   & Excellent. ’Grand vin’ & 16   & Very good       \\ \hline
+19.5 & Very fine indeed       & 15.5 & Good plus       \\ \hline
+19   & Very fine plus         & 15   & Good            \\ \hline
+18.5 & Very fine              & 14.5 & Quite good plus \\ \hline
+18   & Fine plus              & 14   & Quite good      \\ \hline
+17.5 & Fine                   & 13.5 & Not bad plus    \\ \hline
+17   & Very good indeed       & 13   & Not bad         \\ \hline
+16.5 & Very good plus         & 12.5 & Poor            \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Methods}
+The methods we are going to use to solve the two questions mentioned above are mainly based on plots.
+Firstly, to find out the relationship between Parker and Coates' ratings we plot the scatterplot matrix of Price, ParkerPoints and CoatesPoints.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{Fig01.jpg}
+    \label{fig:galaxy}
+\end{figure}
+We can find out the relationship between Parker and Coates from the slope of the scatterplots in Figure.1.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{Fig02.jpg}
+    \label{fig:galaxy}
+\end{figure}
+However, we find that the relationship between price and the rating is vague in this scatterplot matrix. To find the relationship between the two people's rating systems and the price, we plot the scatterplot matrix(Figure.2) of log(Price), log(ParkerPoints), and log(CoatesPoints).\\\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15cm]{Fig03.jpg}
+    \label{fig:galaxy}
+\end{figure}
+Furthermore, to solve the second question, we obtained the box plots(Figure.3) between price and other dummy variables interpreted above. The relationship between these variables are clear in the plots.
+
+
+
 \end{document}
