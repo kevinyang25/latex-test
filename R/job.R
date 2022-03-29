@@ -411,59 +411,59 @@ output = paste(output,AQI_LC_tom_cate,sep="\n")
 discription = paste("\\newcommand\\Discriptions{",result[[4]][1],"}",sep="")
 output = paste(output,discription,sep="\n")
 
-ADI1 = paste("\\newcommand\\ADI1{",result$Atmospheric.Dispersion.Index[1],"}",sep="")
-output = paste(output,ADI1,sep="\n")
+ADIone = paste("\\newcommand\\ADIone{",result$Atmospheric.Dispersion.Index[1],"}",sep="")
+output = paste(output,ADIone,sep="\n")
 
-ADI2 = paste("\\newcommand\\ADI2{",result$Atmospheric.Dispersion.Index[2],"}",sep="")
-output = paste(output,ADI2,sep="\n")
+ADItwo = paste("\\newcommand\\ADItwo{",result$Atmospheric.Dispersion.Index[2],"}",sep="")
+output = paste(output,ADItwo,sep="\n")
 
-ADI3 = paste("\\newcommand\\ADI3{",result$Atmospheric.Dispersion.Index[3],"}",sep="")
-output = paste(output,ADI3,sep="\n")
+ADIthree = paste("\\newcommand\\ADIthree{",result$Atmospheric.Dispersion.Index[3],"}",sep="")
+output = paste(output,ADIthree,sep="\n")
 
-ADI4 = paste("\\newcommand\\ADI4{",result$Atmospheric.Dispersion.Index[4],"}",sep="")
-output = paste(output,ADI4,sep="\n")
+ADIfour = paste("\\newcommand\\ADIfour{",result$Atmospheric.Dispersion.Index[4],"}",sep="")
+output = paste(output,ADIfour,sep="\n")
 
-ADI5 = paste("\\newcommand\\ADI5{",result$Atmospheric.Dispersion.Index[5],"}",sep="")
-output = paste(output,ADI5,sep="\n")
+ADIfive = paste("\\newcommand\\ADIfive{",result$Atmospheric.Dispersion.Index[5],"}",sep="")
+output = paste(output,ADIfive,sep="\n")
 
-ADI6 = paste("\\newcommand\\ADI6{",result$Atmospheric.Dispersion.Index[6],"}",sep="")
-output = paste(output,ADI6,sep="\n")
+ADIsix = paste("\\newcommand\\ADIsix{",result$Atmospheric.Dispersion.Index[6],"}",sep="")
+output = paste(output,ADIsix,sep="\n")
 
-SIS1 = paste("\\newcommand\\SIS1{",result$Surface.Inversion.Strength[1],"}",sep="")
-output = paste(output,SIS1,sep="\n")
+SISone = paste("\\newcommand\\SISone{",result$Surface.Inversion.Strength[1],"}",sep="")
+output = paste(output,SISone,sep="\n")
 
-SIS2 = paste("\\newcommand\\SIS2{",result$Surface.Inversion.Strength[2],"}",sep="")
-output = paste(output,SIS2,sep="\n")
+SIStwo = paste("\\newcommand\\SIStwo{",result$Surface.Inversion.Strength[2],"}",sep="")
+output = paste(output,SIStwo,sep="\n")
 
-SIS3 = paste("\\newcommand\\SIS3{",result$Surface.Inversion.Strength[3],"}",sep="")
-output = paste(output,SIS3,sep="\n")
+SISthree = paste("\\newcommand\\SISthree{",result$Surface.Inversion.Strength[3],"}",sep="")
+output = paste(output,SISthree,sep="\n")
 
-SIS4 = paste("\\newcommand\\SIS4{",result$Surface.Inversion.Strength[4],"}",sep="")
-output = paste(output,SIS4,sep="\n")
+SISfour = paste("\\newcommand\\SISfour{",result$Surface.Inversion.Strength[4],"}",sep="")
+output = paste(output,SISfour,sep="\n")
 
-SIS5 = paste("\\newcommand\\SIS5{",result$Surface.Inversion.Strength[5],"}",sep="")
-output = paste(output,SIS5,sep="\n")
+SISfive = paste("\\newcommand\\SISfive{",result$Surface.Inversion.Strength[5],"}",sep="")
+output = paste(output,SISfive,sep="\n")
 
-SIS6 = paste("\\newcommand\\SIS6{",result$Surface.Inversion.Strength[6],"}",sep="")
-output = paste(output,SIS6,sep="\n")
+SISsix = paste("\\newcommand\\SISsix{",result$Surface.Inversion.Strength[6],"}",sep="")
+output = paste(output,SISsix,sep="\n")
 
-Wind1 = paste("\\newcommand\\Wind1{",result$Wind.dir.mph.[1],"}",sep="")
-output = paste(output,Wind1,sep="\n")
+Windone = paste("\\newcommand\\Windone{",result$Wind.dir.mph.[1],"}",sep="")
+output = paste(output,Windone,sep="\n")
 
-Wind2 = paste("\\newcommand\\Wind2{",result$Wind.dir.mph.[2],"}",sep="")
-output = paste(output,Wind2,sep="\n")
+Windtwo = paste("\\newcommand\\Windtwo{",result$Wind.dir.mph.[2],"}",sep="")
+output = paste(output,Windtwo,sep="\n")
 
-Wind3 = paste("\\newcommand\\Wind3{",result$Wind.dir.mph.[3],"}",sep="")
-output = paste(output,Wind3,sep="\n")
+Windthree = paste("\\newcommand\\Windthree{",result$Wind.dir.mph.[3],"}",sep="")
+output = paste(output,Windthree,sep="\n")
 
-Wind4 = paste("\\newcommand\\Wind4{",result$Wind.dir.mph.[4],"}",sep="")
-output = paste(output,Wind4,sep="\n")
+Windfour = paste("\\newcommand\\Windfour{",result$Wind.dir.mph.[4],"}",sep="")
+output = paste(output,Windfour,sep="\n")
 
-Wind5 = paste("\\newcommand\\Wind5{",result$Wind.dir.mph.[5],"}",sep="")
-output = paste(output,Wind5,sep="\n")
+Windfive = paste("\\newcommand\\Windfive{",result$Wind.dir.mph.[5],"}",sep="")
+output = paste(output,Windfive,sep="\n")
 
-Wind6 = paste("\\newcommand\\Wind6{",result$Wind.dir.mph.[6],"}",sep="")
-output = paste(output,Wind6,sep="\n")
+Windsix = paste("\\newcommand\\Windsix{",result$Wind.dir.mph.[6],"}",sep="")
+output = paste(output,Windsix,sep="\n")
 
 Temp = paste("\\newcommand\\Temp{",result[[9]][1],"}",sep="")
 output = paste(output,Temp,sep="\n")
