@@ -6,7 +6,7 @@
 % https://github.com/anishathalye/gemini
 
 
-\documentclass[final]{beamer}
+\documentclass[final,xcolor=table]{beamer}
 
 % ====================
 % Packages
@@ -22,6 +22,15 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{hyperref}
+
+\definecolor{mycolor}{HTML}{000AFC}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=mycolor
+    }
 
 % ====================
 % Lengths
@@ -31,8 +40,8 @@
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
 \newlength{\sepwidth}
 \newlength{\colwidth}
-\setlength{\sepwidth}{0.025\paperwidth}
-\setlength{\colwidth}{0.3\paperwidth}
+\setlength{\sepwidth}{0.03\paperwidth}
+\setlength{\colwidth}{0.45\paperwidth}
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
@@ -40,20 +49,18 @@
 % Title
 % ====================
 
-\title{Some fancy title: followed by some more text}
+\title{Air Quality Forecast and Dispersion Outlook of \\Allegheny County, Pennsylvania}
 
-\author{Ali F. Kalay \inst{1} \and Other 1 \inst{2} \and Other 2 \inst{2}}
-
-\institute[shortinst]{\inst{1} Some Institute \samelineand \inst{2} Another Institute}
+\author{03/30/2022}
 
 % ====================
 % Footer (optional)
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
-  ABC Conference 2025, New York --- XYZ-1234 \hfill
-  \href{mailto:a.kalay@example.com}{a.k@example.com}}
+  \href{https://www.example.com}{https://www.alleghenycounty.us/Health-Department/Programs/Air-Quality/Air-Quality.aspx} \hfill
+  Allegheny County \hfill
+  \href{mailto:a.kalay@example.com}{412-687-2243}}
 % (can be left out to remove footer)
 
 % ====================
@@ -72,10 +79,10 @@
 \addtobeamertemplate{headline}{}
 {
     \begin{tikzpicture}[remember picture,overlay]
-      \node [anchor=north west, inner sep=3cm] at ([xshift=0.0cm,yshift=1.0cm]current page.north west)
-      {\includegraphics[height=5.0cm]{logos/Logo-Left.png}}; % also try shield-white.eps
+      \node [anchor=north west, inner sep=3.5cm] at ([xshift=-2cm,yshift=2.5cm]current page.north west)
+      {\includegraphics[height=2.5cm]{logos/allegheny.png}}; % also try shield-white.eps
       \node [anchor=north east, inner sep=3cm] at ([xshift=0.0cm,yshift=2.5cm]current page.north east)
-      {\includegraphics[height=8.0cm]{logos/Logo-Right.png}};
+      {\includegraphics[height=8.0cm]{logos/achd.png}};
     \end{tikzpicture}
 }
 
@@ -85,231 +92,141 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block title}
+  \begin{block}{Air Quality Forecast}
 
-    Some block contents, followed by a diagram, followed by a dummy paragraph.
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}[scale=6]
-        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-      \end{tikzpicture}
-      \caption{A figure caption.}
-    \end{figure}
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
-    eget libero ac ullamcorper. Integer et euismod ante. Aenean vestibulum
-    lobortis augue, ut lobortis turpis rhoncus sed. Proin feugiat nibh a
-    lacinia dignissim. Proin scelerisque, risus eget tempor fermentum, ex
-    turpis condimentum urna, quis malesuada sapien arcu eu purus.
-
-  \end{block}
-
-  \begin{block}{A block containing a list}
-
-    Nam vulputate nunc felis, non condimentum lacus porta ultrices. Nullam sed
-    sagittis metus. Etiam consectetur gravida urna quis suscipit.
-
-    \begin{itemize}
-      \item \textbf{Mauris tempor} risus nulla, sed ornare
-      \item \textbf{Libero tincidunt} a duis congue vitae
-      \item \textbf{Dui ac pretium} morbi justo neque, ullamcorper
-    \end{itemize}
-
-    Eget augue porta, bibendum venenatis tortor.
-
-  \end{block}
-
-  \begin{alertblock}{A highlighted block}
-
-    This block catches your eye, so \textbf{important stuff} should probably go
-    here.
-
-    Curabitur eu libero vehicula, cursus est fringilla, luctus est. Morbi
-    consectetur mauris quam, at finibus elit auctor ac. Aliquam erat volutpat.
-    Aenean at nisl ut ex ullamcorper eleifend et eu augue. Aenean quis velit
-    tristique odio convallis ultrices a ac odio.
-
-    \begin{itemize}
-      \item \textbf{Fusce dapibus tellus} vel tellus semper finibus. In
-        consequat, nibh sed mattis luctus, augue diam fermentum lectus.
-      \item \textbf{In euismod erat metus} non ex. Vestibulum luctus augue in
-        mi condimentum, at sollicitudin lorem viverra.
-      \item \textbf{Suspendisse vulputate} mauris vel placerat consectetur.
-        Mauris semper, purus ac hendrerit molestie, elit mi dignissim odio, in
-        suscipit felis sapien vel ex.
-    \end{itemize}
-
-    Aenean tincidunt risus eros, at gravida lorem sagittis vel. Vestibulum ante
-    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-
-  \end{alertblock}
-
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
-  \begin{block}{A block containing an enumerated list}
-
-    Vivamus congue volutpat elit non semper. Praesent molestie nec erat ac
-    interdum. In quis suscipit erat. \textbf{Phasellus mauris felis, molestie
-    ac pharetra quis}, tempus nec ante. Donec finibus ante vel purus mollis
-    fermentum. Sed felis mi, pharetra eget nibh a, feugiat eleifend dolor. Nam
-    mollis condimentum purus quis sodales. Nullam eu felis eu nulla eleifend
-    bibendum nec eu lorem. Vivamus felis velit, volutpat ut facilisis ac,
-    commodo in metus.
-
-    \begin{enumerate}
-      \item \textbf{Morbi mauris purus}, egestas at vehicula et, convallis
-        accumsan orci. Orci varius natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus.
-      \item \textbf{Cras vehicula blandit urna ut maximus}. Aliquam blandit nec
-        massa ac sollicitudin. Curabitur cursus, metus nec imperdiet bibendum,
-        velit lectus faucibus dolor, quis gravida metus mauris gravida turpis.
-      \item \textbf{Vestibulum et massa diam}. Phasellus fermentum augue non
-        nulla accumsan, non rhoncus lectus condimentum.
-    \end{enumerate}
-
-  \end{block}
-
-  \begin{block}{Fusce aliquam magna velit}
-
-    Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
-    vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
-    velit. Suspendisse rhoncus massa porttitor augue feugiat molestie. Sed
-    molestie ut orci nec malesuada. Sed ultricies feugiat est fringilla
-    posuere.
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            scale only axis,
-            no markers,
-            domain=0:2*pi,
-            samples=100,
-            axis lines=center,
-            axis line style={-},
-            ticks=none]
-          \addplot[red] {sin(deg(x))};
-          \addplot[blue] {cos(deg(x))};
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Another figure caption.}
-    \end{figure}
-
-  \end{block}
-
-  \begin{block}{Nam cursus consequat egestas}
-
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
-    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
-    sit amet sollicitudin risus tincidunt non.
-
-    Etiam sit amet tempus lorem, aliquet condimentum velit. Donec et nibh
-    consequat, sagittis ex eget, dictum orci. Etiam quis semper ante. Ut eu
-    mauris purus. Proin nec consectetur ligula. Mauris pretium molestie
-    ullamcorper. Integer nisi neque, aliquet et odio non, sagittis porta justo.
-
-    \begin{itemize}
-      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
-        sed est scelerisque, elementum mollis augue iaculis.
-        \begin{itemize}
-          \item In sed est finibus, vulputate
-            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
-            porttitor quis.
-          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
-            tempor tincidunt eu a arcu.
-          \item Donec rhoncus vestibulum erat, quis aliquam leo
-            gravida egestas.
-        \end{itemize}
-      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
-        faucibus purus, sed lobortis justo erat id turpis.
-      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
-        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
-    \end{itemize}
-
-  \end{block}
-
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
-  \begin{block}{A block containing some math}
-
-    Nullam non est elit. In eu ornare justo. Maecenas porttitor sodales lacus,
-    ut cursus augue sodales ac.
-
-    $$
-    \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
-    $$
-
-    Interdum et malesuada fames $\{1, 4, 9, \ldots\}$ ac ante ipsum primis in
-    faucibus. Cras eleifend dolor eu nulla suscipit suscipit. Sed lobortis non
-    felis id vulputate.
-
-    \heading{A heading inside a block}
-
-    Praesent consectetur mi $x^2 + y^2$ metus, nec vestibulum justo viverra
-    nec. Proin eget nulla pretium, egestas magna aliquam, mollis neque. Vivamus
-    dictum $\mathbf{u}^\intercal\mathbf{v}$ sagittis odio, vel porta erat
-    congue sed. Maecenas ut dolor quis arcu auctor porttitor.
-
-    \heading{Another heading inside a block}
-
-    Sed augue erat, scelerisque a purus ultricies, placerat porttitor neque.
-    Donec $P(y \mid x)$ fermentum consectetur $\nabla_x P(y \mid x)$ sapien
-    sagittis egestas. Duis eget leo euismod nunc viverra imperdiet nec id
-    justo.
-
-  \end{block}
-
-  \begin{block}{Nullam vel erat at velit convallis laoreet}
-
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
-    scelerisque congue diam. Fusce dapibus dui ut augue pulvinar iaculis.
+    This is the daily forecasted Air Quality Index (AQI) for each area provided by the PA Department of Environmental Protection. The AQI is based on PM2.5 or Ozone, whichever is forecasted to be higher.
 
     \begin{table}
+      \renewcommand{\arraystretch}{1.5}
       \centering
-      \begin{tabular}{l r r c}
-        \toprule
-        \textbf{First column} & \textbf{Second column} & \textbf{Third column} & \textbf{Fourth} \\
-        \midrule
-        Foo & 13.37 & 384,394 & $\alpha$ \\
-        Bar & 2.17 & 1,392 & $\beta$ \\
-        Baz & 3.14 & 83,742 & $\delta$ \\
-        Qux & 7.59 & 974 & $\gamma$ \\
-        \bottomrule
+      \begin{tabular}{|c| c| c|}
+        \hline
+        \rowcolor{lightgray}\textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
+        \hline
+        \rowcolor[HTML]{F2FDFE}{Today} & {\textbf{Moderate} 51 AQI} & {\textbf{Moderate} 53 AQI} \\
+        \hline
+        \rowcolor[HTML]{F2FDFE}Tomorrow & {\textbf{Good} 38 AQI} & {\textbf{Good} 36 AQI} \\
+        \hline
       \end{tabular}
-      \caption{A table caption.}
+      \caption{Please refer the Air Quality Index guide}
     \end{table}
 
-    Donec quis posuere ligula. Nunc feugiat elit a mi malesuada consequat. Sed
-    imperdiet augue ac nibh aliquet tristique. Aenean eu tortor vulputate,
-    eleifend lorem in, dictum urna. Proin auctor ante in augue tincidunt
-    tempor. Proin pellentesque vulputate odio, ac gravida nulla posuere
-    efficitur. Aenean at velit vel dolor blandit molestie. Mauris laoreet
-    commodo quam, non luctus nibh ullamcorper in. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos.
+    \heading{Today’s Forecast:}
+    Much warmer air will stream into the area Wednesday with sunshine returning by the afternoon as winds turn into the south-southeast. PM2.5 will rise some Wednesday, perhaps into the moderate range as a moderate to strong inversion is likely during the morning, with better air quality occurring during the afternoon.
+    
 
-    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
-    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
-    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
-    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
-    auctor urna non, tempus sem.
+    \begin{table}
+      \begin{adjustbox}{width=1\textwidth}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+      \begin{tabular}{|c |c |c |c|}
+      \hline
+      \rowcolor{lightgray}\multicolumn{4}{|c|}{\textbf{Guide to the Air Quality Index (AQI)}} \\
+      \hline
+      \rowcolor{lightgray}\textbf{Color} & \textbf{Description} & \textbf{Meaning} & \textbf{AQI} \\
+      \hline
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FF2121}\textbf{Red}} & Unhealthy & Everyone should limit exertion outdoors. & 151 - 200 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FF6A20}\textbf{Orange}} & Unhealthy for Sensitive Groups & Sensitive people should limit exertion outdoors. & 101 - 150 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FFF421}\textbf{Yellow}} & Moderate & Extremely sensitive people may wish to limit outdoor exertion. & 51 - 100 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{6AFE19}\textbf{Green}} & Good & No health impacts are expected in this range. & 0 - 50 \\
+      \hline
+      \end{tabular}
+      \end{adjustbox}
+    \end{table}
+
+    \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{\underline{Data provided by the PA Department of Environmental Protection}}
 
   \end{block}
+
+  \begin{block}{ACHD Air Dispersion 36-Hour Forecast}
+
+    This is the dispersion forecast for Allegheny County starting from this morning through tomorrow afternoon. The atmospheric dispersion index is a rating of the atmosphere’s ability to transport pollution away from its source and is based on emissions and weather. Better atmospheric dispersion can improve air quality.
+
+    \begin{table}
+      \begin{adjustbox}{width=1\textwidth}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+      \begin{tabular}{ |c|c|c|c|c|}
+      \hline
+      \rowcolor{lightgray}\multicolumn{2}{|c|}{\textbf{Forecast Period}} & \textbf{Atmospheric Dispersion Index} & \textbf{Surface Inversion Strength} & \textbf{Wind (dir, mph)}\\
+      \hline
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Today}} & Morning & Poor–8 & Slight & ESE 7-8 to SE 8-9 \\ 
+      \rowcolor[HTML]{F2FDFE} & Afternoon & Generally Good–46 & -- & SE 9-11 \\
+      \hline
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Tonight}} & Evening  & Poor–12 & -- & SE 9-10 to SSE 10-11 Gust 20-21\\
+      \rowcolor[HTML]{F2FDFE} & Overnight & Generally Poor–18 & -- & S 11-14 Gust 21-28\\
+      \hline
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Tomorrow}} & Morning & Generally Good–44 & None & SSW 14-15 to SW 15-17 Gust 25-34\\
+      \rowcolor[HTML]{F2FDFE} & Afternoon & Very Good-136 & -- & SW 17-18 to W 11 Gust 21-35\\
+      \hline
+      \end{tabular}
+      \end{adjustbox}
+      \caption{Please refer the Atmospheric Dispersion Index guide and the daily Surface Temperature Inversion Report.}
+    \end{table}
+
+    \heading{ACHD Remarks:}
+    Chance of rain this morning and rain likely tomorrow. Also, the sounding data from the National Weather Service was unavailable, so I had to use an alternative source.
+    
+    Data provided by the National Weather Service (NWS)
+    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{\underline{Fire Weather Planning Forecast}} and \href{http://weather.uwyo.edu/upperair/sounding.html}{\underline{PIT NWS Products}}
+
+  \end{block}
+  
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+    \begin{table}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+        \begin{tabular}{ |c |c |c |c|c |c |c|  }
+        \hline
+        \rowcolor{lightgray}\multicolumn{7}{|c|}{\textbf{Guide to the Atmospheric Dispersion Index}} \\
+        \hline
+        \rowcolor[HTML]{F2FDFE}\textbf{Very Poor} & \textbf{Poor} & \textbf{Generally Poor} & \textbf{Fair} & \textbf{Generally Good} & \textbf{Good} & \textbf{Very Good} \\
+        \hline
+        \rowcolor[HTML]{F2FDFE}1 - 6 & 7 - 12 & 13 - 20 & 21 - 40 & 41 - 60 & 61 - 100 & > 100 \\
+        \hline
+        \end{tabular}
+    \end{table}
+
+
+  \begin{block}{ACHD Surface Temperature Inversion Report}
+
+    \textit{This is the 7 AM surface-based temperature inversion report for Allegheny County.}
+
+    This morning’s surface inversion of \underline{\textbf{~0.59 °C}} with a depth of \underline{\textbf{~60}} m is estimated to break at \underline{\textbf{N/A}} . This surface inversion can be characterized as: None/ \underline{\textbf{Slight}} / Weak / Moderate / Strong. No upper inversion starting below ~1000 m is reported.
+
+  \end{block}
+
+  \begin{block}{What does the Surface Temperature Inversion Report mean}
+
+    A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
+    
+    \begin{columns}[T]
+    \begin{column}{0.43\linewidth}
+    ~\includegraphics[width=1\textwidth]{citypic.png}
+    \end{column}
+    \begin{column}{0.5\linewidth}
+    
+        Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
+        
+        \textbf{Surface Temperature Inversion Characterization}
+            \begin{itemize}
+              \item 0-0.9 C°: Slight
+              \item 1-2.9 C°: Weak
+              \item 3-4.9 C°: Moderate
+              \item ≥5 C°: Strong
+            \end{itemize}
+    \end{column}
+    \end{columns}    
+
+
+  \end{block}
+
+
 
   \begin{block}{References}
 
@@ -325,4 +242,3 @@
 \end{frame}
 
 \end{document}
-
