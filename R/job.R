@@ -267,8 +267,8 @@ if (is_empty(table5)==FALSE){
   scale5<- fivestrength(surfaceinversion)
   if(is.na(breaktemp)==FALSE){
     for(i in 2:25){
-      if(p4_1[2,i]!=23){
-        if(abs(p4_1[3,i]-breaktemp)<=2){
+      if(as.numeric(p4_1[2,i])!=23){
+        if(abs(as.numeric(p4_1[3,i])-breaktemp)<=2){
           time5=p4_1[2,i]
           break
         }
