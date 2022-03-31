@@ -1,173 +1,240 @@
-\documentclass[11pt]{article}
-\usepackage{amsmath, amssymb, amscd, amsthm, amsfonts}
+% UQ Gemini theme
+% See: https://github.com/alfurka/gemini-uq
+% Forked from
+% https://rev.cs.uchicago.edu/k4rtik/gemini-uccs
+% which is forked from
+% https://github.com/anishathalye/gemini
+
+
+\documentclass[final]{beamer}
+
+% ====================
+% Packages
+% ====================
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[size=custom,width=100,height=75,scale=1.0]{beamerposter}
+\usetheme{gemini}
+\usecolortheme{uchicago}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
 \usepackage{tabularx}
-\oddsidemargin 0pt
-\evensidemargin 0pt
-\marginparwidth 40pt
-\marginparsep 10pt
-\topmargin -20pt
-\headsep 10pt
-\textheight 8.7in
-\textwidth 6.65in
-\linespread{1.2}
-\title{Linear model HW2 3.b}
-\author{Yucheng Wang yw6@andrew.cmu.edu}
-\date{}
+\usepackage{adjustbox}
+\input{data-raw/data_X07}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{conjecture}[theorem]{Conjecture}
 
-\newcommand{\rr}{\mathbb{R}}
+% ====================
+% Lengths
+% ====================
 
-\newcommand{\al}{\alpha}
-\input{data-raw/variables}
-\DeclareMathOperator{\conv}{conv}
-\DeclareMathOperator{\aff}{aff}
+% If you have N columns, choose \sepwidth and \colwidth such that
+% (N+1)*\sepwidth + N*\colwidth = \paperwidth
+\newlength{\sepwidth}
+\newlength{\colwidth}
+\setlength{\sepwidth}{0.03\paperwidth}
+\setlength{\colwidth}{0.45\paperwidth}
+
+\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
+
+% ====================
+% Title
+% ====================
+
+\title{Air Quality Forecast and Dispersion Outlook of \\Allegheny County, Pennsylvania}
+
+\author{03/30/2022}
+
+% ====================
+% Footer (optional)
+% ====================
+
+\footercontent{
+  \href{https://www.example.com}{https://www.alleghenycounty.us/Health-Department/Programs/Air-Quality/Air-Quality.aspx} \hfill
+  Allegheny County \hfill
+  \href{mailto:a.kalay@example.com}{412-687-2243}}
+% (can be left out to remove footer)
+
+% ====================
+% Logo (optional)
+% ====================
+
+% use this to include logos on the left and/or right side of the header:
+% \logoright{\includegraphics[height=7cm]{logo1.pdf}}
+% \logoleft{\includegraphics[height=7cm]{logo2.pdf}}
+
+% ====================
+% Body
+% ====================
 
 \begin{document}
+\addtobeamertemplate{headline}{}
+{
+    \begin{tikzpicture}[remember picture,overlay]
+      \node [anchor=north west, inner sep=3.5cm] at ([xshift=0.0cm,yshift=0.0cm]current page.north west)
+      {\includegraphics[height=2.5cm]{logos/allegheny.png}}; % also try shield-white.eps
+      \node [anchor=north east, inner sep=3cm] at ([xshift=0.0cm,yshift=2.5cm]current page.north east)
+      {\includegraphics[height=8.0cm]{logos/achd.jpeg}};
+    \end{tikzpicture}
+}
 
-\maketitle
+\begin{frame}[t]
+\begin{columns}[t]
+\separatorcolumn
 
-\section{data}
+\begin{column}{\colwidth}
 
-\AQIPittToday
+  \begin{block}{Air Quality Forecast}
 
-\AQIPittTom
+    This is the daily forecasted Air Quality Index (AQI) for each area provided by the PA Department of Environmental Protection. The AQI is based on PM2.5 or Ozone, whichever is forecasted to be higher.
 
-\AQILCToday
+    \begin{table}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+      \begin{tabular}{|c| c| c|}
+        \hline
+        \textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
+        \hline
+        Today & 51 AQI & 53 AQI \\
+        \hline
+        Tomorrow & 38 AQI & 36 AQI \\
+        \hline
+      \end{tabular}
+      \caption{See Page 2 for the Air Quality Index guide}
+    \end{table}
 
-\AQILCTom
+    \heading{Today’s Forecast:}
+    Much warmer air will stream into the area Wednesday with sunshine returning by the afternoon as winds turn into the south-southeast. PM2.5 will rise some Wednesday, perhaps into the moderate range as a moderate to strong inversion is likely during the morning, with better air quality occurring during the afternoon.
+    
+\usepackage[table]{xcolor,colortbl}
 
-\AQIPittTodayCate
+    \begin{table}
+      \begin{adjustbox}{width=1\textwidth}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+      \begin{tabular}{|c |c |c |c|}
+      \hline
+      \multicolumn{4}{|c|}{\textbf{Guide to the Air Quality Index (AQI)}} \\
+      \hline
+      \textbf{Color} & \textbf{Description} & \textbf{Meaning} & \textbf{AQI} \\
+      \hline
+      {\cellcolor[HTML]{AA0044}Red} & Unhealthy & Everyone should limit exertion outdoors. & 151 - 200 \\
+      Orange & Unhealthy for Sensitive Groups & Sensitive people should limit exertion outdoors. & 101 - 150 \\
+      Yellow & Moderate & Extremely sensitive people may wish to limit outdoor exertion. & 51 - 100 \\
+      Green & Good & No health impacts are expected in this range. & 0 - 50 \\
+      \hline
+      \end{tabular}
+      \end{adjustbox}
+    \end{table}
 
-\AQIPittTomCate
+    \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{Data provided by the PA Department of Environmental Protection}
 
-\AQILCTodayCate
+  \end{block}
 
-\AQILCTomCate
+  \begin{block}{ACHD Air Dispersion 36-Hour Forecast}
 
-\Discriptions
+    This is the dispersion forecast for Allegheny County starting from this morning through tomorrow afternoon. The atmospheric dispersion index is a rating of the atmosphere’s ability to transport pollution away from its source and is based on emissions and weather. Better atmospheric dispersion can improve air quality.
 
-\ADIone
+    \begin{table}
+      \begin{adjustbox}{width=1\textwidth}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+      \begin{tabular}{ |c|c|c|c|c|}
+      \hline
+      \multicolumn{2}{|c|}{\textbf{Forecast Period}} & \textbf{Atmospheric Dispersion Index} & \textbf{Surface Inversion Strength} & \textbf{Wind(dir, mph)}\\
+      \hline
+      \multirow{\textbf{Today}} & Morning & Poor–8 & Slight & ESE 7-8 to SE 8-9 \\ 
+      & Afternoon & Generally Good–46 & -- & SE 9-11 \\
+      \hline
+      \multirow{\textbf{Tonight}} & Evening  & Poor–12 & -- & SE 9-10 to SSE 10-11 Gust 20-21\\
+      & Overnight & Generally Poor–18 & -- & S 11-14 Gust 21-28\\
+      \hline
+      \multirow{\textbf{Tomorrow}} & Morning & Generally Good–44 & None & SSW 14-15 to SW 15-17 Gust 25-34\\
+      & Afternoon & Very Good-136 & -- & SW 17-18 to W 11 Gust 21-35\\
+      \hline
+      \end{tabular}
+      \end{adjustbox}
+      \caption{See page 2 for the Atmospheric Dispersion Index guide and the daily Surface Temperature Inversion Report.}
+    \end{table}
 
-\ADItwo
+    \heading{ACHD Remarks:}
+    Chance of rain this morning and rain likely tomorrow. Also, the sounding data from the National Weather Service was unavailable, so I had to use an alternative source.
+    
+    Data provided by the National Weather Service (NWS)
+    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{Fire Weather Planning Forecast} and \href{http://weather.uwyo.edu/upperair/sounding.html}{PIT NWS Products}
 
-\ADIthree
+  \end{block}
+  
+\end{column}
 
-\ADIfour
+\separatorcolumn
 
-\ADIfive
+\begin{column}{\colwidth}
 
-\ADIsix
-
-\SISone
-
-\SIStwo
-
-\SISthree
-
-\SISfour
-
-\SISfive
-
-\SISsix
-
-\Windone
-
-\Windtwo
-
-\Windthree
-
-\Windfour
-
-\Windfive
-
-\Windsix
-
-\Temp
-
-\Depth
-
-\Time
-
-\Scale
-
-\Inversion
-
-\Title
-
-The dataset we use for this study come from Parker  (2003)  and  Coates  (2004), it contains prices for 72 wines from the 2000 vintage in Bordeaux. The variables are listed below. (The data are available in the fileBordeaux.csv, in the online supplement accompanying Sheather(2009).)
-
-$Y$=   Price = the price (in pounds sterling) of 12 bottles of wine
-
-$x_1$=   ParkerPoints = Robert Parker’s rating of the wine (out of 100)
-
-$x_2$=   CoatesPoints = Clive Coates’ rating of the wine (out of 20)
-
-$x_3$=   P95andAbove = 1 (0) if the Parker score is 95 or above (otherwise)
-
-$x_4$=   FirstGrowth = 1 (0) if the wine is a First Growth (otherwise)
-
-$x5$=   CultWine = 1 (0) if the wine is a cult wine (otherwise)
-
-$x_6$=   Pomerol = 1 (0) if the wine is from Pomerol (otherwise)
-
-$x_7$=   VintageSuperstar = 1 (0) if the wine is a superstar (otherwise)
-
-
-For $x_1$, $x_2$ the rating system of Parker(2003) and Coates  (2004) are different.\\ Parker's(2003) rating system is 100-point based and the scale is as follows:
-\begin{table}[h]
-\begin{tabular}{|l|l|}
-\hline
-96-100 points & Extraordinary              \\ \hline
-90-95 points  & Outstanding                \\ \hline
-80-89 points  & Above average to very good \\ \hline
-70-79 points  & Average                    \\ \hline
-50-69 points  & Below average to poor      \\ \hline
-\end{tabular}
-\end{table}
-Coates  (2004) rating system is 20-point based and the scale is as follows:\\\\\\\\\\\\\\\\\\
-
-\begin{table}[h]
-\begin{tabular}{|l|l|l|l|}
-\hline
-20   & Excellent. ’Grand vin’ & 16   & Very good       \\ \hline
-19.5 & Very fine indeed       & 15.5 & Good plus       \\ \hline
-19   & Very fine plus         & 15   & Good            \\ \hline
-18.5 & Very fine              & 14.5 & Quite good plus \\ \hline
-18   & Fine plus              & 14   & Quite good      \\ \hline
-17.5 & Fine                   & 13.5 & Not bad plus    \\ \hline
-17   & Very good indeed       & 13   & Not bad         \\ \hline
-16.5 & Very good plus         & 12.5 & Poor            \\ \hline
-\end{tabular}
-\end{table}
-
-\section{Methods}
-The methods we are going to use to solve the two questions mentioned above are mainly based on plots.
-Firstly, to find out the relationship between Parker and Coates' ratings we plot the scatterplot matrix of Price, ParkerPoints and CoatesPoints.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=15cm]{Fig01.jpg}
-    \label{fig:galaxy}
-\end{figure}
-We can find out the relationship between Parker and Coates from the slope of the scatterplots in Figure.1.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=15cm]{Fig02.jpg}
-    \label{fig:galaxy}
-\end{figure}
-However, we find that the relationship between price and the rating is vague in this scatterplot matrix. To find the relationship between the two people's rating systems and the price, we plot the scatterplot matrix(Figure.2) of log(Price), log(ParkerPoints), and log(CoatesPoints).\\\\
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=15cm]{Fig03.jpg}
-    \label{fig:galaxy}
-\end{figure}
-Furthermore, to solve the second question, we obtained the box plots(Figure.3) between price and other dummy variables interpreted above. The relationship between these variables are clear in the plots.
+    \begin{table}
+      \renewcommand{\arraystretch}{1.5}
+      \centering
+        \begin{tabular}{ |c |c |c |c|c |c |c|  }
+        \hline
+        \multicolumn{7}{|c|}{Guide to the Atmospheric Dispersion Index} \\
+        \hline
+        Very Poor & Poor & Generally Poor & Fair & Generally Good & Good & Very Good \\
+        \hline
+        1 - 6 & 7 - 12 & 13 - 20 & 21 - 40 & 41 - 60 & 61 - 100 & > 100 \\
+        \hline
+        \end{tabular}
+    \end{table}
 
 
+  \begin{block}{ACHD Surface Temperature Inversion Report}
+
+    This is the 7 AM surface-based temperature inversion report for Allegheny County.
+
+    This morning’s surface inversion of \textbf{~0.59 °C} with a depth of \textbf{~60} m is estimated to break at \textbf{N/A} . This surface inversion can be characterized as: None/ \textbf{Slight} / Weak / Moderate / Strong. No upper inversion starting below ~1000 m is reported.
+
+  \end{block}
+
+  \begin{block}{What does the Surface Temperature Inversion Report mean}
+
+    A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
+    
+    \begin{columns}[T]
+    \begin{column}{0.33\linewidth}
+    ~\includegraphics[width=1\textwidth]{citypic.png}
+    \end{column}
+    \begin{column}{0.6\linewidth}
+    
+        Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
+        
+        \textbf{Surface Temperature Inversion Characterization}
+            \begin{itemize}
+              \item 0-0.9 C°: Slight
+              \item 1-2.9 C°: Weak
+              \item 3-4.9 C°: Moderate
+              \item ≥5 C°: Strong
+            \end{itemize}
+    \end{column}
+    \end{columns}    
+
+
+  \end{block}
+
+
+
+  \begin{block}{References}
+
+    \nocite{*}
+    \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+
+  \end{block}
+
+\end{column}
+
+\separatorcolumn
+\end{columns}
+\end{frame}
 
 \end{document}
