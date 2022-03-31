@@ -347,7 +347,7 @@ sixout<-function(x){ # Create a description value for how strong the Surface Inv
 }
 # generate current system time for report's title
 currentDate <- Sys.Date()
-title <- paste("Air Quality Forecast and Dispersion Outlook of Allegheny County, Pennsylvania for", as.character(currentDate))
+title <- paste("Air Quality Forecast and Dispersion Outlook \\\\of Allegheny County, Pennsylvania for", as.character(currentDate))
 
 # AQI
 # define the conditions for AQI
