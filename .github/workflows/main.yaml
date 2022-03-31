@@ -10,6 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: xu-cheng/latex-action@v2
+      with:
+      root_file: main.tex
+      extra_fonts: |
+        ./path/to/custom.ttf
+        ./fonts/*.otf
     - name: Set up Git repository
       uses: actions/checkout@v1
     - name: Compile LaTeX document

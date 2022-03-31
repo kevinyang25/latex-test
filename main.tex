@@ -6,12 +6,13 @@
 % https://github.com/anishathalye/gemini
 
 
-\documentclass[final]{beamer}
+\documentclass[final,xcolor=table]{beamer}
 
 % ====================
 % Packages
 % ====================
 
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[size=custom,width=100,height=75,scale=1.0]{beamerposter}
 \usetheme{gemini}
@@ -23,7 +24,13 @@
 \pgfplotsset{compat=1.17}
 \usepackage{tabularx}
 \usepackage{adjustbox}
+\usepackage{hyperref}
 
+\definecolor{mycolor}{HTML}{000AFC}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=mycolor
+    }
 
 % ====================
 % Lengths
@@ -69,7 +76,6 @@
 % ====================
 
 \begin{document}
-
 \addtobeamertemplate{headline}{}
 {
     \begin{tikzpicture}[remember picture,overlay]
@@ -95,11 +101,11 @@
       \centering
       \begin{tabular}{|c| c| c|}
         \hline
-        \textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
+        \rowcolor{lightgray}\textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
         \hline
-        Today & 51 AQI & 53 AQI \\
+        \rowcolor[HTML]{F2FDFE}Today & 51 AQI & 53 AQI \\
         \hline
-        Tomorrow & 38 AQI & 36 AQI \\
+        \rowcolor[HTML]{F2FDFE}Tomorrow & 38 AQI & 36 AQI \\
         \hline
       \end{tabular}
       \caption{See Page 2 for the Air Quality Index guide}
@@ -108,7 +114,6 @@
     \heading{Today’s Forecast:}
     Much warmer air will stream into the area Wednesday with sunshine returning by the afternoon as winds turn into the south-southeast. PM2.5 will rise some Wednesday, perhaps into the moderate range as a moderate to strong inversion is likely during the morning, with better air quality occurring during the afternoon.
     
-\usepackage[table]{xcolor,colortbl}
 
     \begin{table}
       \begin{adjustbox}{width=1\textwidth}
@@ -116,20 +121,20 @@
       \centering
       \begin{tabular}{|c |c |c |c|}
       \hline
-      \multicolumn{4}{|c|}{\textbf{Guide to the Air Quality Index (AQI)}} \\
+      \rowcolor{lightgray}\multicolumn{4}{|c|}{\textbf{Guide to the Air Quality Index (AQI)}} \\
       \hline
-      \textbf{Color} & \textbf{Description} & \textbf{Meaning} & \textbf{AQI} \\
+      \rowcolor{lightgray}\textbf{Color} & \textbf{Description} & \textbf{Meaning} & \textbf{AQI} \\
       \hline
-       & Unhealthy & Everyone should limit exertion outdoors. & 151 - 200 \\
-      Orange & Unhealthy for Sensitive Groups & Sensitive people should limit exertion outdoors. & 101 - 150 \\
-      Yellow & Moderate & Extremely sensitive people may wish to limit outdoor exertion. & 51 - 100 \\
-      Green & Good & No health impacts are expected in this range. & 0 - 50 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FF2121}\textbf{Red}} & Unhealthy & Everyone should limit exertion outdoors. & 151 - 200 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FF6A20}\textbf{Orange}} & Unhealthy for Sensitive Groups & Sensitive people should limit exertion outdoors. & 101 - 150 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{FFF421}\textbf{Yellow}} & Moderate & Extremely sensitive people may wish to limit outdoor exertion. & 51 - 100 \\
+      \rowcolor[HTML]{F2FDFE}{\cellcolor[HTML]{6AFE19}\textbf{Green}} & Good & No health impacts are expected in this range. & 0 - 50 \\
       \hline
       \end{tabular}
       \end{adjustbox}
     \end{table}
 
-    \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{Data provided by the PA Department of Environmental Protection}
+    \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{\underline{Data provided by the PA Department of Environmental Protection}}
 
   \end{block}
 
@@ -143,16 +148,16 @@
       \centering
       \begin{tabular}{ |c|c|c|c|c|}
       \hline
-      \multicolumn{2}{|c|}{\textbf{Forecast Period}} & \textbf{Atmospheric Dispersion Index} & \textbf{Surface Inversion Strength} & \textbf{Wind(dir, mph)}\\
+      \rowcolor{lightgray}\multicolumn{2}{|c|}{\textbf{Forecast Period}} & \textbf{Atmospheric Dispersion Index} & \textbf{Surface Inversion Strength} & \textbf{Wind (dir, mph)}\\
       \hline
-      \multirow{\textbf{Today}} & Morning & Poor–8 & Slight & ESE 7-8 to SE 8-9 \\ 
-      & Afternoon & Generally Good–46 & -- & SE 9-11 \\
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Today}} & Morning & Poor–8 & Slight & ESE 7-8 to SE 8-9 \\ 
+      \rowcolor[HTML]{F2FDFE} & Afternoon & Generally Good–46 & -- & SE 9-11 \\
       \hline
-      \multirow{\textbf{Tonight}} & Evening  & Poor–12 & -- & SE 9-10 to SSE 10-11 Gust 20-21\\
-      & Overnight & Generally Poor–18 & -- & S 11-14 Gust 21-28\\
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Tonight}} & Evening  & Poor–12 & -- & SE 9-10 to SSE 10-11 Gust 20-21\\
+      \rowcolor[HTML]{F2FDFE} & Overnight & Generally Poor–18 & -- & S 11-14 Gust 21-28\\
       \hline
-      \multirow{\textbf{Tomorrow}} & Morning & Generally Good–44 & None & SSW 14-15 to SW 15-17 Gust 25-34\\
-      & Afternoon & Very Good-136 & -- & SW 17-18 to W 11 Gust 21-35\\
+      \rowcolor[HTML]{F2FDFE}\multirow{\textbf{Tomorrow}} & Morning & Generally Good–44 & None & SSW 14-15 to SW 15-17 Gust 25-34\\
+      \rowcolor[HTML]{F2FDFE} & Afternoon & Very Good-136 & -- & SW 17-18 to W 11 Gust 21-35\\
       \hline
       \end{tabular}
       \end{adjustbox}
@@ -163,7 +168,7 @@
     Chance of rain this morning and rain likely tomorrow. Also, the sounding data from the National Weather Service was unavailable, so I had to use an alternative source.
     
     Data provided by the National Weather Service (NWS)
-    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{Fire Weather Planning Forecast} and \href{http://weather.uwyo.edu/upperair/sounding.html}{PIT NWS Products}
+    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{\underline{Fire Weather Planning Forecast}} and \href{http://weather.uwyo.edu/upperair/sounding.html}{\underline{PIT NWS Products}}
 
   \end{block}
   
@@ -178,11 +183,11 @@
       \centering
         \begin{tabular}{ |c |c |c |c|c |c |c|  }
         \hline
-        \multicolumn{7}{|c|}{Guide to the Atmospheric Dispersion Index} \\
+        \rowcolor{lightgray}\multicolumn{7}{|c|}{\textbf{Guide to the Atmospheric Dispersion Index}} \\
         \hline
-        Very Poor & Poor & Generally Poor & Fair & Generally Good & Good & Very Good \\
+        \rowcolor[HTML]{F2FDFE}\textbf{Very Poor} & \textbf{Poor} & \textbf{Generally Poor} & \textbf{Fair} & \textbf{Generally Good} & \textbf{Good} & \textbf{Very Good} \\
         \hline
-        1 - 6 & 7 - 12 & 13 - 20 & 21 - 40 & 41 - 60 & 61 - 100 & > 100 \\
+        \rowcolor[HTML]{F2FDFE}1 - 6 & 7 - 12 & 13 - 20 & 21 - 40 & 41 - 60 & 61 - 100 & > 100 \\
         \hline
         \end{tabular}
     \end{table}
@@ -190,9 +195,9 @@
 
   \begin{block}{ACHD Surface Temperature Inversion Report}
 
-    This is the 7 AM surface-based temperature inversion report for Allegheny County.
+    \textit{This is the 7 AM surface-based temperature inversion report for Allegheny County.}
 
-    This morning’s surface inversion of \textbf{~0.59 °C} with a depth of \textbf{~60} m is estimated to break at \textbf{N/A} . This surface inversion can be characterized as: None/ \textbf{Slight} / Weak / Moderate / Strong. No upper inversion starting below ~1000 m is reported.
+    This morning’s surface inversion of \underline{\textbf{~0.59 °C}} with a depth of \underline{\textbf{~60}} m is estimated to break at \underline{\textbf{N/A}} . This surface inversion can be characterized as: None/ \underline{\textbf{Slight}} / Weak / Moderate / Strong. No upper inversion starting below ~1000 m is reported.
 
   \end{block}
 
@@ -201,10 +206,10 @@
     A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
     
     \begin{columns}[T]
-    \begin{column}{0.33\linewidth}
+    \begin{column}{0.43\linewidth}
     ~\includegraphics[width=1\textwidth]{citypic.png}
     \end{column}
-    \begin{column}{0.6\linewidth}
+    \begin{column}{0.5\linewidth}
     
         Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
         
@@ -233,9 +238,7 @@
 \end{column}
 
 \separatorcolumn
-
 \end{columns}
-
 \end{frame}
 
 \end{document}
