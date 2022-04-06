@@ -151,7 +151,10 @@ if(is_empty(p4_2)==FALSE){
   tomorrowmorningwind<-"--"
   tomorrowafternoonwind<-"--"
 }
-times<-strptime(Sys.time(),"%Y-%m-%d %H:%M:%S") # Extract the system date and time
+# Website 4 - Air Dispersion Index
+# For this website, the numbers in the first three columns of the first table after the "ADI Early" and "ADI Late" rows will be scraped
+# These consist of a number and a description
+times<-strptime(Sys.time(),"%Y-%m-%d %H:%M:%S",tz = "America/New_York") # Extract the system date and time
 y<-as.character(format(times,"%Y")) # Extract and store the year value
 m<-as.character(format(times,"%m")) # Extract and store the month value
 d<-as.character(format(times,"%d")) # Extract and store the day value
@@ -196,14 +199,14 @@ if(is_empty(table4)==FALSE){
   altomvalue<-str_extract(adilatetomorrow,'\\d{1,2}')
   altomdesc<-str_extract(adilatetomorrow,regex('[:alpha:]{1,}[:space:]{1}[:alpha:]{1,}|[:alpha:]{1,}'))
   
-  if(is.na(adiearlytomorrow)){
+  if(is.na(adiearlytomorrow)==TRUE){
     aetomvalue<-0
     aetomdesc<-"Very Poor"
   }
   
-  if(is.na(adilatetomorrow)){
+  if(is.na(adilatetomorrow)==TRUE){
     altomvalue<-0
-    aetomdesc<-"Very Poor"
+    altomdesc<-"Very Poor"
   }
   
   # These if-else statements change the descriptions of the ADIs if they are "Gen Poor" or "Gen Good" to "Generally Poor" or "Generally Good"
