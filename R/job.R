@@ -10,6 +10,11 @@ library(rvest)
 library(dplyr)
 library(purrr)
 
+times<-strptime(Sys.time(),"%Y-%m-%d %H:%M:%S",tz = "America/New_York") # Extract the system date and time
+y<-as.character(format(times,"%Y")) # Extract and store the year value
+m<-as.character(format(times,"%m")) # Extract and store the month value
+d<-as.character(format(times,"%d")) # Extract and store the day value
+h<-as.character(format(times,"%H")) # Extract and store the hour value
 
 # 1, webscraping processes
 # webscraping with rvest package, some regular expressions are used.
@@ -265,7 +270,7 @@ if(is_empty(table4)==FALSE){
 # Website is updated at 7AM every day
 
 if (as.numeric(h)<8){
-  yesterday<-strptime(as.Date(Sys.Date())-1,"%Y-%m-%d") # Using yesterday's date if website hasn't updated yet
+  yesterday<-strptime(as.Date(Sys.Date())-1,"%Y-%m-%d",tz = "America/New_York") # Using yesterday's date if website hasn't updated yet
   y5<-as.character(format(yesterday,"%Y"))
   m5<-as.character(format(yesterday,"%m"))
   d5<-as.character(format(yesterday,"%d"))
@@ -617,6 +622,6 @@ AQI_LC_tom_color = paste("\\newcommand\\AQILCTomColor{",AQI_LC_tom_color,"}",sep
 output = paste(output,AQI_LC_tom_color,sep="\n")
 
 
-writeLines(output,paste0("data-raw/data_", make.names(strsplit(strsplit(as.character(Sys.time()),":")[[1]][1]," ")[[1]][2]), ".tex"))
+writeLines(output,paste0("data-raw/data_", make.names(h), ".tex"))
 
 
