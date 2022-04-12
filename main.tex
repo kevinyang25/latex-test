@@ -6,6 +6,9 @@
 % https://github.com/anishathalye/gemini
 
 
+
+
+
 \documentclass[final,xcolor=table]{beamer}
 
 % ====================
@@ -26,6 +29,7 @@
 \usepackage{adjustbox}
 \usepackage{hyperref}
 \input{data-raw/data_X07}
+%\input{data-raw/data_X07}
 \definecolor{mycolor}{HTML}{000AFC}
 \hypersetup{
     colorlinks=true,
@@ -103,9 +107,20 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
         \hline
         \rowcolor{lightgray}\textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
         \hline
-        \rowcolor[HTML]{F2FDFE}{Today} & {\textbf{\AQIPittTodayCate} \AQIPittToday AQI} & {\textbf{\AQIPittTomCate} \AQIPittTom AQI} \\
+        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTodayColor}PM2.5} & {\cellcolor[HTML]{\AQILCTodayColor}PM2.5}\\ 
+        
+        \rowcolor[HTML]{F2FDFE}{\textbf{Today}} & {\cellcolor[HTML]{\AQIPittTodayColor}\textbf{\AQIPittTodayCate}} & {\cellcolor[HTML]{\AQILCTodayColor}\textbf{\AQILCTodayCate}} \\
+        
+        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTodayColor}{\AQIPittToday} AQI} & {\cellcolor[HTML]{\AQILCTodayColor}{\AQILCToday} AQI} \\
+        
         \hline
-        \rowcolor[HTML]{F2FDFE}Tomorrow & {\textbf{\AQILCTodayCate} \AQILCToday AQI} & {\textbf{\AQILCTomCate} \AQILCTom AQI} \\
+        
+        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTomColor}PM2.5} & {\cellcolor[HTML]{\AQILCTomColor}PM2.5}\\ 
+        
+        \rowcolor[HTML]{F2FDFE}{\textbf{Tomorrow}} & {\cellcolor[HTML]{\AQIPittTomColor}\textbf{\AQIPittTomCate}} & {\cellcolor[HTML]{\AQILCTomColor}\textbf{\AQILCTomCate}} \\
+        
+        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTomColor}{\AQIPittTom} AQI} & {\cellcolor[HTML]{\AQILCTomColor}{\AQILCTom} AQI} \\
+        
         \hline
       \end{tabular}
       \caption{Please refer the Air Quality Index guide}
@@ -137,6 +152,38 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
     \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{\underline{Data provided by the PA Department of Environmental Protection}}
 
   \end{block}
+
+  \begin{block}{What does the Surface Temperature Inversion Report mean}
+
+    A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
+    
+    \begin{columns}[T]
+    \begin{column}{0.43\linewidth}
+    ~\includegraphics[width=1\textwidth]{citypic.png}
+    \end{column}
+    \begin{column}{0.5\linewidth}
+    
+        Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
+        
+        \textbf{Surface Temperature Inversion Characterization}
+            \begin{itemize}
+              \item 0-0.9 C°: Slight
+              \item 1-2.9 C°: Weak
+              \item 3-4.9 C°: Moderate
+              \item ≥5 C°: Strong
+            \end{itemize}
+    \end{column}
+    \end{columns}    
+
+
+  \end{block}
+  
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
 
   \begin{block}{ACHD Air Dispersion 36-Hour Forecast}
 
@@ -170,14 +217,6 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
     Data provided by the National Weather Service (NWS)
     \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{\underline{Fire Weather Planning Forecast}} and \href{http://weather.uwyo.edu/upperair/sounding.html}{\underline{PIT NWS Products}}
 
-  \end{block}
-  
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
     \begin{table}
       \renewcommand{\arraystretch}{1.5}
       \centering
@@ -192,37 +231,15 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
         \end{tabular}
     \end{table}
 
+  \end{block}
+  
+
 
   \begin{block}{ACHD Surface Temperature Inversion Report}
 
     \textit{This is the 7 AM surface-based temperature inversion report for Allegheny County.}
 
     This morning’s surface inversion of \underline{\textbf{$\sim$\Temp}} with a depth of \underline{\textbf{$\sim$\Depth}} is estimated to break at \underline{\textbf{\Time}} . This surface inversion can be characterized as: \underline{\textbf{\Scale}} (None / Slight / Weak / Moderate / Strong. \Inversion
-
-  \end{block}
-
-  \begin{block}{What does the Surface Temperature Inversion Report mean}
-
-    A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
-    
-    \begin{columns}[T]
-    \begin{column}{0.43\linewidth}
-    ~\includegraphics[width=1\textwidth]{citypic.png}
-    \end{column}
-    \begin{column}{0.5\linewidth}
-    
-        Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
-        
-        \textbf{Surface Temperature Inversion Characterization}
-            \begin{itemize}
-              \item 0-0.9 C°: Slight
-              \item 1-2.9 C°: Weak
-              \item 3-4.9 C°: Moderate
-              \item ≥5 C°: Strong
-            \end{itemize}
-    \end{column}
-    \end{columns}    
-
 
   \end{block}
 
@@ -241,3 +258,4 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
 \end{columns}
 \end{frame}
 \end{document}
+
