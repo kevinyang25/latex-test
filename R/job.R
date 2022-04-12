@@ -162,11 +162,6 @@ if(is_empty(p4_2)==FALSE){
 # Website 4 - Air Dispersion Index
 # For this website, the numbers in the first three columns of the first table after the "ADI Early" and "ADI Late" rows will be scraped
 # These consist of a number and a description
-times<-strptime(Sys.time(),"%Y-%m-%d %H:%M:%S",tz = "America/New_York") # Extract the system date and time
-y<-as.character(format(times,"%Y")) # Extract and store the year value
-m<-as.character(format(times,"%m")) # Extract and store the month value
-d<-as.character(format(times,"%d")) # Extract and store the day value
-h<-as.character(format(times,"%H")) # Extract and store the hour value
 
 if (as.numeric(h)>=4 & as.numeric(h)<12){
   link4<-"https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ"
@@ -273,7 +268,7 @@ if(is_empty(table4)==FALSE){
 # Website is updated at 7AM every day
 
 if (as.numeric(h)<8){
-  yesterday<-strptime(with_tz(Sys.time(),tzone="US/Eastern"),"%Y-%m-%d %H:%M:%S") # Using yesterday's date if website hasn't updated yet
+  yesterday<-strptime(with_tz(Sys.Date()-1,tzone="US/Eastern"),"%Y-%m-%d") # Using yesterday's date if website hasn't updated yet
   y5<-as.character(format(yesterday,"%Y"))
   m5<-as.character(format(yesterday,"%m"))
   d5<-as.character(format(yesterday,"%d"))
@@ -288,7 +283,6 @@ table5<-page5 %>% # Extract the node containing the data, which is the whole tab
   html_text()
 
 fivestrength<-function(x){ # Create a description value for how strong the Surface Inversion Strength is based on its value
-  x = as.numeric(x)
   if (x==0){
     return("None")
   } else if (x>0 & x<1){
@@ -330,19 +324,6 @@ if (is_empty(table5)==FALSE){
   time5 <- "--"
   scale5<- fivestrength(surfaceinversion)
   mode<-"observations"
-  if(is.na(breaktemp)==FALSE){
-    for(i in 2:25){
-      if(p4_1[2,i]!=23){
-        if(abs(p4_1[3,i]-breaktemp)<=2){
-          time5=p4_1[2,i]
-          break
-        }
-        else{break}
-        
-      }
-      
-    }
-  }
   
   # Determining if there are any upper inversions
   sentence<-five[which(five[,2]<1000),] # Take all temperature values below 1000 m
@@ -388,6 +369,8 @@ if (is_empty(table5)==FALSE){
     matchedtempdiff<-unique(unlistedfivetemp)[negativetempdiff]
     inversiondepth<-as.numeric(five[which(matchedtempdiff%in%unique(unlistedfivetemp))[negativetempdiff],3][1])-as.numeric(five[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
     
+    breaktemp<-(((inversiondepth/100)+five[which(tempdifffive<0),4][[1]])*9/5)+32 # Take this number and match it to the weather forecast. The time of day when this temperature is reached is the break time.
+    
     # Determining if there are any upper inversions
     sentence<-five[which(five[,3]<1000),] # Take all temperature values below 1000 m
     tempdiffunder1k<-diff(unlist(sentence[,4])) # Make differenced list
@@ -405,6 +388,20 @@ if (is_empty(table5)==FALSE){
     scale5<- fivestrength(surfaceinversion)
     mode<-"forecast"
     inversion5<-upperinversion()
+    if(is.na(breaktemp)==FALSE){
+      for(i in 2:25){
+        if(as.numeric(p4_1[2,i])!=23){
+          if(abs(as.numeric(p4_1[3,i])-breaktemp)<=2){
+            time5=p4_1[2,i]
+            break
+          }
+          else{break}
+          
+        }
+        
+      }
+    }
+    
   } else{
     surfaceinversion<-"--"
     inversiondepth<-"--"
@@ -457,7 +454,6 @@ if(is_empty(table6)==FALSE){
   inversiondepth2<-as.numeric(six[which(matchedtempdiff%in%unique(unlistedsixtemp))[negativetempdiff],3][1])-as.numeric(six[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
   
   sixout<-function(x){ # Create a description value for how strong the Surface Inversion Strength is based on its value
-    x = as.numeric(x)
     if (x==0){
       return("None")
     } else if (x>0 & x<1){
@@ -640,5 +636,15 @@ output = paste(output,AQI_LC_tom_color,sep="\n")
 
 
 writeLines(output,paste0("data-raw/data_", make.names(h), ".tex"))
+
+
+
+
+
+
+
+
+
+
 
 
