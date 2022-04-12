@@ -588,6 +588,33 @@ output = paste(output,Inversion,sep="\n")
 Title = paste("\\newcommand\\Title{",result[[14]][1],"}",sep="")
 output = paste(output,Title,sep="\n")
 
+# color code function
+aqi_color<-function(x){
+  if (x == "Good"){
+    "6AFE19"
+  } else if (x == "Moderate"){
+    "FFF421"
+  } else if (x == "Unhealthy for Sensitive Groups"){
+    "FF6A20"
+  } else "FF2121" 
+}
+
+AQI_pitt_today_color <- aqi_color(result$Pittsburgh.Area[1])
+AQI_pitt_tom_color <- aqi_color(result$Pittsburgh.Area[2])
+AQI_LC_today_color <- aqi_color(result$Liberty.Clairton.Area[1])
+AQI_LC_tom_color <- aqi_color(result$Liberty.Clairton.Area[2])
+
+AQI_pitt_today_color = paste("\\newcommand\\AQIPittTodayColor{",AQI_pitt_today_color,"}",sep="")
+output = paste(output,AQI_pitt_today_color,sep="\n")
+
+AQI_pitt_tom_color = paste("\\newcommand\\AQIPittTomColor{",AQI_pitt_tom_color,"}",sep="")
+output = paste(output,AQI_pitt_tom_color,sep="\n")
+
+AQI_LC_today_color = paste("\\newcommand\\AQILCTodayColor{",AQI_LC_today_color,"}",sep="")
+output = paste(output,AQI_LC_today_color,sep="\n")
+
+AQI_LC_tom_color = paste("\\newcommand\\AQILCTomColor{",AQI_LC_tom_color,"}",sep="")
+output = paste(output,AQI_LC_tom_color,sep="\n")
 
 
 writeLines(output,paste0("data-raw/data_", make.names(strsplit(strsplit(as.character(Sys.time()),":")[[1]][1]," ")[[1]][2]), ".tex"))
