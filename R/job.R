@@ -392,7 +392,9 @@ if (is_empty(table5)==FALSE){
       for(i in 2:25){
         if(as.numeric(p4_1[2,i])!=23){
           if(abs(as.numeric(p4_1[3,i])-breaktemp)<=2){
-            time5=p4_1[2,i]
+            if(as.numeric(p4_1[2,i])<12){
+            time5=as.numeric(p4_1[2,i])
+            time5=paste(time5," am",sep="")}
             break
           }
           else{break}
