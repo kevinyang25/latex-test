@@ -6,6 +6,7 @@ install.packages("dplyr")
 install.packages("purrr")
 install.packages("lubridate")
 
+
 library(stringr)
 library(curl)
 library(rvest)
