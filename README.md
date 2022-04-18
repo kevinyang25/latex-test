@@ -5,6 +5,12 @@ Thanks a lot to [Cheng Xu](https://github.com/xu-cheng) for his repo https://git
 
 This by commit and push, you can compile the main.tex, the pdf report is in the [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages) branch, it is generated automatically. 
 
+* [Files](#files)
+* [General Logic](#general-logic)
+* [Workflow files](#workflow-files)
+* [Possible Errors](#possible-errors)
+* [Guidance for adding new functions](#guidance-for-adding-new-functions)
+
 ## Files
 <img width="786" alt="image" src="https://user-images.githubusercontent.com/89940553/163876583-0bc90d73-3eec-4903-8ac0-cec3da0523f0.png">
 
