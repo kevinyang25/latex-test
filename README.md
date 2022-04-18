@@ -5,8 +5,6 @@ Thanks a lot to [Cheng Xu](https://github.com/xu-cheng) for his repo https://git
 
 This by commit and push, you can compile the main.tex, the pdf report is in the [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages) branch, it is generated automatically. 
 
-The daily data in the report is from [ACHD-data](https://github.com/Yuchengyw6/latex-test/tree/master/data-raw), which is also automatically scraped from different sources daily.
-
 ## General Logic
 
 Generally, this report is generated in two steps:
