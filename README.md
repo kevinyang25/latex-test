@@ -1,9 +1,15 @@
 # Latex GitHub Actions For ACHD weather report
 
-This repository is forked from the GitHub action for [compiling a LaTeX document](https://github.com/xu-cheng/latex-action).
+This repository is adapted from the GitHub action for [compiling a LaTeX document](https://github.com/xu-cheng/latex-action).
 Thanks a lot to [Cheng Xu](https://github.com/xu-cheng) for his repo https://github.com/xu-cheng/latex-action and thanks a lot to the instruction written by [David Haberthür](https://github.com/habi).
 
 This by commit and push, you can compile the main.tex, the pdf report is in the [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages) branch, it is generated automatically. 
+
+## Files
+<img width="786" alt="image" src="https://user-images.githubusercontent.com/89940553/163876583-0bc90d73-3eec-4903-8ac0-cec3da0523f0.png">
+
+The files with red squares are the most important files in this project.
+
 
 ## General Logic
 
