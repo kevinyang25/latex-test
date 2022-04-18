@@ -34,10 +34,14 @@ pitt = webpage1_1 %>%
 if (is_empty(pitt)==FALSE){
   todaypitt=str_extract(pitt,"(?<=Today).*?(?=AQI)")
   todaypitt=strsplit(todaypitt,"-")
+  AQIDateToday = substr(todaypitt[[1]][1],3,12)
+  AQIWeekToday = weekdays(as.Date(AQIDateToday,"%m/%d/%Y"))
   todaypitt=strsplit(todaypitt[[1]][2]," ")
   todaypitt=todaypitt[[1]][2]
   tomorrowpitt=str_extract(pitt,"(?<=Tomorrow).*?(?=AQI)")
   tomorrowpitt=strsplit(tomorrowpitt,"-")
+  AQIDateTom = substr(tomorrowpitt[[1]][1],3,12)
+  AQIWeekTom = weekdays(as.Date(AQIDateToom,"%m/%d/%Y"))
   tomorrowpitt=strsplit(tomorrowpitt[[1]][2]," ")
   tomorrowpitt=tomorrowpitt[[1]][2]
 } else{
@@ -636,6 +640,19 @@ output = paste(output,AQI_LC_today_color,sep="\n")
 
 AQI_LC_tom_color = paste("\\newcommand\\AQILCTomColor{",AQI_LC_tom_color,"}",sep="")
 output = paste(output,AQI_LC_tom_color,sep="\n")
+
+
+AQI_pitt_today_Date = paste("\\newcommand\\AQIDateToday{",AQIDateToday,"}",sep="")
+output = paste(output,AQI_pitt_today_Date,sep="\n")
+
+AQI_pitt_tom_Date = paste("\\newcommand\\AQIDateTom{",AQIDateTom,"}",sep="")
+output = paste(output,AQI_pitt_tom_Date,sep="\n")
+
+AQI_LC_today_Week = paste("\\newcommand\\AQIWeekToday{",AQIWeekToday,"}",sep="")
+output = paste(output,AQI_LC_today_Week,sep="\n")
+
+AQI_LC_tom_Week = paste("\\newcommand\\AQIWeekTom{",AQIWeekTom,"}",sep="")
+output = paste(output,AQI_LC_tom_Week,sep="\n")
 
 
 writeLines(output,paste0("data-raw/data_", make.names(h), ".tex"))
