@@ -513,6 +513,9 @@ adi <- data.frame(
 result = c(aqi,aqi_forecast,adi,temp5,depth5,time5,scale5,inversion5,title)
 
 output = ""
+
+# From here, we are generating the .tex file, you can add any varibles you like by using the format below.
+
 AQI_pitt_today = paste("\\newcommand\\AQIPittToday{",todaypitt,"}",sep="")
 output = paste(output,AQI_pitt_today,sep="\n")
 
