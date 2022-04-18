@@ -1,51 +1,82 @@
-%AQI Pittsburgh today
-\newcommand\AQIPittToday{51}
-%AQI Pittsburgh tomorrow
-\newcommand\AQIPittTom{38}
-%AQI LC area today
-\newcommand\AQILCToday{53}
-%AQI LC area tomorrow
-\newcommand\AQILCTom{36}
-%AQI category Pittsburgh today 
-\newcommand\AQIPittTodayCate{Unhealthy}
-%AQI category Pittsburgh tomorrow 
+% The AQI of Pitt today
+\newcommand\AQIPittToday{34}
+% The AQI of Pitt Tomorrow
+\newcommand\AQIPittTom{30}
+% The AQI of Liberty Clairton area Today
+\newcommand\AQILCToday{35}
+% The AQI of Liberty Clairton area Tomorrow
+\newcommand\AQILCTom{29}
+% The AQI of Pitt today, good/moderate/unhealthy for sensitive group/Unhealthy
+\newcommand\AQIPittTodayCate{Good}
+% The AQI of Pitt Tomorrow, good/moderate/unhealthy for sensitive group/Unhealthy
 \newcommand\AQIPittTomCate{Good}
-%AQI category LC area today 
-\newcommand\AQILCTodayCate{Unhealthy}
-%AQI category LC area tomorrow 
+% The AQI of Liberty Clairton area Today, good/moderate/unhealthy for sensitive group/Unhealthy
+\newcommand\AQILCTodayCate{Good}
+% The AQI of Liberty Clairton area Tomorrow, good/moderate/unhealthy for sensitive group/Unhealthy
 \newcommand\AQILCTomCate{Good}
-%Discussion on https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast.aspx?vargroup=sw
-\newcommand\Discriptions{An approaching cold front Thursday will mean showers and in spots, a thunderstorm. Strong and gusty southwesterly winds will mean very good dispersion and hence, good air quality. Afternoon temperatures will soar into the lower 70s. Turning much colder Thursday night with leftover rain showers as temperatures plunge back into the upper 30s.}
-%ADI from today morning to tomorrow afternoon respectively
-\newcommand\ADIone{Poor - 8}
-\newcommand\ADItwo{Generally Good - 46}
+% Discriptions from https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast.aspx?vargroup=sw
+\newcommand\Discriptions{ Low pressure tracking to the southeast Monday will bring a chilly rain back in Monday into Monday night. Southeasterly surface winds will create enough dispersion to where PM2.5 and ozone remain in the good range. }
+% ADI today morning
+\newcommand\ADIone{Generally Good - 42}
+% ADI today afternoon
+\newcommand\ADItwo{Fair - 30}
+% ADI today evening
 \newcommand\ADIthree{Poor - 12}
-\newcommand\ADIfour{Generally Poor - 18}
-\newcommand\ADIfive{Generally Good - 44}
-\newcommand\ADIsix{Very Good - 36}
-%Surface Inversion Strengh from today morning to tomorrow afternoon respectively
+% ADI today overnight
+\newcommand\ADIfour{Generally Poor - 17}
+% ADI tomorrow morning
+\newcommand\ADIfive{Good - 86}
+% ADI tomorrow afternoon
+\newcommand\ADIsix{Very Good - 131}
+% Surface inversion Strength today morning
 \newcommand\SISone{None}
+% Surface inversion Strength today afternoon
 \newcommand\SIStwo{--}
+% Surface inversion Strength today evening
 \newcommand\SISthree{--}
+% Surface inversion Strength today overnight
 \newcommand\SISfour{--}
+% Surface inversion Strength tomorrow morning
 \newcommand\SISfive{None}
+% Surface inversion Strength tomorrow afternoon
 \newcommand\SISsix{--}
-%Wind speed and dir from today morning to tomorrow afternoon respectively
-\newcommand\Windone{S - 11}
-\newcommand\Windtwo{S - 13}
-\newcommand\Windthree{SW - 17}
-\newcommand\Windfour{SW - 17}
-\newcommand\Windfive{S - 17}
-\newcommand\Windsix{SW - 17}
-%This morning's surface inversion of ___
+% wind speed and direction today morning
+\newcommand\Windone{W - 15}
+% wind speed and direction today afternoon
+\newcommand\Windtwo{W - 17}
+% wind speed and direction today evening
+\newcommand\Windthree{W - 9}
+% wind speed and direction today overnight
+\newcommand\Windfour{W - 7}
+% wind speed and direction tomorrow morning
+\newcommand\Windfive{SW - 3}
+% wind speed and direction tomorrow afternoon
+\newcommand\Windsix{S - 6}
+% Inversion Strength(temperature)
 \newcommand\Temp{0 °C}
-%morning's surface inversion depth
-\newcommand\Depth{8 m}
-%morning's surface inversion break time
+% Inversion Depth
+\newcommand\Depth{0 m}
+% Inversion Break Time
 \newcommand\Time{--}
-%This surface inversion can be characterized as: None/ Slight / Weak / Moderate / Strong.
+% This Inversion could be characterized as ____(None,Slight,weak,Moderate,Strong)
 \newcommand\Scale{None}
-%No upper inversion starting below ~1000 m is reported.
-\newcommand\Inversion{No upper inversion starting below ~1000 m is reported}
-% title
-\newcommand\Title{Air Quality Forecast and Dispersion Outlook of Allegheny County, Pennsylvania for 2022-03-31}
+% whether a upper inversion starting below ~1000 m is reported
+\newcommand\Inversion{Yes, an upper inversion starting below ~1000 m is reported}
+% Title
+\newcommand\Title{Air Quality Forecast and Dispersion Outlook \\of Allegheny County, Pennsylvania for 2022-04-18}
+% Color of the pitt AQI today, if good then 6AFE19, if Moderate then FFF421, if Unhealthy for Sensitive Groups then FF6A20, if Unhealthy then FF2121
+\newcommand\AQIPittTodayColor{6AFE19}
+% Color of the pitt AQI Tomorrow, if good then 6AFE19, if Moderate then FFF421, if Unhealthy for Sensitive Groups then FF6A20, if Unhealthy then FF2121
+\newcommand\AQIPittTomColor{6AFE19}
+% Color of the Liberty Clairton area AQI Today, if good then 6AFE19, if Moderate then FFF421, if Unhealthy for Sensitive Groups then FF6A20, if Unhealthy then FF2121
+\newcommand\AQILCTodayColor{6AFE19}
+% Color of the Liberty Clairton area AQI Tomorrow, if good then 6AFE19, if Moderate then FFF421, if Unhealthy for Sensitive Groups then FF6A20, if Unhealthy then FF2121
+\newcommand\AQILCTomColor{6AFE19}
+% Today's Date of scraping the AQI
+\newcommand\AQIDateToday{4/18/22}
+% Today's weekday of scraping the AQI
+\newcommand\AQIWeekToday{Monday}
+% Tomorrow's Date of scraping the AQI
+\newcommand\AQIDateTom{4/19/22}
+% Tomorrow's weekday of scraping the AQI
+\newcommand\AQIWeekTom{Tuesday}
