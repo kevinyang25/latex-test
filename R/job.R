@@ -41,7 +41,7 @@ if (is_empty(pitt)==FALSE){
   tomorrowpitt=str_extract(pitt,"(?<=Tomorrow).*?(?=AQI)")
   tomorrowpitt=strsplit(tomorrowpitt,"-")
   AQIDateTom = substr(tomorrowpitt[[1]][1],3,12)
-  AQIWeekTom = weekdays(as.Date(AQIDateToom,"%m/%d/%Y"))
+  AQIWeekTom = weekdays(as.Date(AQIDateTom,"%m/%d/%Y"))
   tomorrowpitt=strsplit(tomorrowpitt[[1]][2]," ")
   tomorrowpitt=tomorrowpitt[[1]][2]
 } else{
