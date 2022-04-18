@@ -1,9 +1,15 @@
 # Latex GitHub Actions For ACHD weather report
 
-This repository is forked from the GitHub action for [compiling a LaTeX document](https://github.com/xu-cheng/latex-action).
+This repository is adapted from the GitHub action for [compiling a LaTeX document](https://github.com/xu-cheng/latex-action).
 Thanks a lot to [Cheng Xu](https://github.com/xu-cheng) for his repo https://github.com/xu-cheng/latex-action and thanks a lot to the instruction written by [David Haberthür](https://github.com/habi).
 
 This by commit and push, you can compile the main.tex, the pdf report is in the [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages) branch, it is generated automatically. 
+
+## Files
+<img width="786" alt="image" src="https://user-images.githubusercontent.com/89940553/163876583-0bc90d73-3eec-4903-8ac0-cec3da0523f0.png">
+
+The files with red squares are the most important files in this project.
+
 
 ## General Logic
 
@@ -30,7 +36,7 @@ Ideally you do not need to change anything inside these files.
 
 ## Possible Errors
 
-1, Some websites source we are using might be unfunctional in some specific days. If you receive an error message via email, and find that the file [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) did not update itself or some data is wrong, you may need to modify this file manually, details please refer to [example.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/example.tex). After change the [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) and commit the changes manually, the github action will run again automatically, wait for a few minute and check whether [main.pdf](https://github.com/Yuchengyw6/latex-test/blob/gh-pages/main.pdf) is updated or not. 
+1, Some websites sources we are using might be unfunctional in some specific days. If you receive an error message via email, and find that the file [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) did not update itself or some data is wrong, you may need to modify this file manually, details please refer to [example.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/example.tex). After change the [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) and commit the changes manually, the github action will run again automatically, wait for a few minute and check whether [main.pdf](https://github.com/Yuchengyw6/latex-test/blob/gh-pages/main.pdf) is updated or not. 
 
 2, If you find some github action tasks failed, you may want to navigate to the [Action Page](https://github.com/Yuchengyw6/latex-test/actions), you may find error massage for each task. For the data scraping tasks, it is normal to have some failures each day since some of the websites may not always be accesable, you only need need to care about whether [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) update it self or not. Ideally the latex report generating process would not fail, if it fails after changing the data manually, you need to be sure the format of the data is correct.
 
