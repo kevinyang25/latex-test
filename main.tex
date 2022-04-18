@@ -1,19 +1,15 @@
-% UQ Gemini theme
-% See: https://github.com/alfurka/gemini-uq
-% Forked from
-% https://rev.cs.uchicago.edu/k4rtik/gemini-uccs
-% which is forked from
-% https://github.com/anishathalye/gemini
 
-
-
-
-
-\documentclass[final,xcolor=table]{beamer}
+% define the document class for the report: beamer
+% this can be useful if you find some latex grammar is not working
+% try to google your problem like "problem + beamer + latex"
+\documentclass[final, xcolor=table]{beamer}
 
 % ====================
 % Packages
 % ====================
+
+% please put the logos and the pictures used in the report
+% in the "logos" file of the Github repository
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -53,10 +49,16 @@
 % Title
 % ====================
 
+% extract title using the date we generated
 \title{\Title}
 
 \author{Allegheny County Health Department}
+% this is the line that is under the "Allegheny County Health Department"
+% we are not exactly using this line of code
+% !!DO NOT DELETE IT!!
+% or the code will report an error
 \institute[shortinst]{ \samelineand }
+
 % ====================
 % Footer (optional)
 % ====================
@@ -80,6 +82,7 @@
 % ====================
 
 \begin{document}
+% include the logos on the left and right of the headline
 \addtobeamertemplate{headline}{}
 {
     \begin{tikzpicture}[remember picture,overlay]
@@ -89,43 +92,55 @@
       {\includegraphics[height=8.0cm]{logos/achd.png}};
     \end{tikzpicture}
 }
+% you can adjust the position of the logo using "xshift" and "yshift"
+% use "height" to adjust the size of the picture
+
 
 \begin{frame}[t]
 \begin{columns}[t]
 \separatorcolumn
 
 \begin{column}{\colwidth}
-
-  \begin{block}{Air Quality Forecast}
-This is the daily forecasted Air Quality Index (AQI) for each area provided by the PA Department of Environmental Protection. The AQI is based on PM2.5 or Ozone, whichever is forecasted to be higher.
+  % here, we start the first block of  "Air Quality Forecast"
+  \begin{block}{Air Quality Forecast}% block name
+    This is the daily forecasted Air Quality Index (AQI) for each area provided by the PA Department of Environmental Protection. The AQI is based on PM2.5 or Ozone, whichever is forecasted to be higher.
    
-
+    % the functions these tables uses
+    % \rowcolor[HTML]{"include the words here"}: the color of the entire row using the html code for the color
+    % \cellcolor[HTML]{"include the words here"}: the color of the cell using the html code for the color
+    % \textbf{}: bold the words
+    % \multicolumn{}: create multi-column in the table
+    
+    
     \begin{table}
-      \renewcommand{\arraystretch}{1.5}
+      \renewcommand{\arraystretch}{1.5} % use to adjust the height of all the rows
       \centering
-      \begin{tabular}{|c| c| c|}
+      \begin{tabular}{|c| c| c|} % 3 columns for the table
         \hline
-        \rowcolor{lightgray}\textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\
+        \rowcolor{lightgray}\textbf{Forecast Period} & \textbf{Pittsburgh Area} & \textbf{Liberty-Clairton Area} \\ % line break
         \hline
-        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTodayColor}PM2.5} & {\cellcolor[HTML]{\AQILCTodayColor}PM2.5}\\ 
+        \rowcolor[HTML]{F2FDFE} {\textbf{Today}} &  {\cellcolor[HTML]{\AQIPittTodayColor}PM2.5} & {\cellcolor[HTML]{\AQILCTodayColor}PM2.5}\\ 
         
-        \rowcolor[HTML]{F2FDFE}{\textbf{Today}} & {\cellcolor[HTML]{\AQIPittTodayColor}\textbf{\AQIPittTodayCate}} & {\cellcolor[HTML]{\AQILCTodayColor}\textbf{\AQILCTodayCate}} \\
+        \rowcolor[HTML]{F2FDFE} {\AQIWeekToday} & {\cellcolor[HTML]{\AQIPittTodayColor}\textbf{\AQIPittTodayCate}} & {\cellcolor[HTML]{\AQILCTodayColor}\textbf{\AQILCTodayCate}} \\
         
-        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTodayColor}{\AQIPittToday} AQI} & {\cellcolor[HTML]{\AQILCTodayColor}{\AQILCToday} AQI} \\
+        \rowcolor[HTML]{F2FDFE} {\AQIDateToday} & {\cellcolor[HTML]{\AQIPittTodayColor}{\AQIPittToday} AQI} & {\cellcolor[HTML]{\AQILCTodayColor}{\AQILCToday} AQI} \\
         
         \hline
+        % include "hline" when you want to draw an actual
+        % border for the above row inside the table
         
-        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTomColor}PM2.5} & {\cellcolor[HTML]{\AQILCTomColor}PM2.5}\\ 
+        \rowcolor[HTML]{F2FDFE} {\textbf{Tomorrow}} & {\cellcolor[HTML]{\AQIPittTomColor}PM2.5} & {\cellcolor[HTML]{\AQILCTomColor}PM2.5}\\ 
         
-        \rowcolor[HTML]{F2FDFE}{\textbf{Tomorrow}} & {\cellcolor[HTML]{\AQIPittTomColor}\textbf{\AQIPittTomCate}} & {\cellcolor[HTML]{\AQILCTomColor}\textbf{\AQILCTomCate}} \\
+        \rowcolor[HTML]{F2FDFE} {\AQIWeekTom} & {\cellcolor[HTML]{\AQIPittTomColor}\textbf{\AQIPittTomCate}} & {\cellcolor[HTML]{\AQILCTomColor}\textbf{\AQILCTomCate}} \\
         
-        \rowcolor[HTML]{F2FDFE} & {\cellcolor[HTML]{\AQIPittTomColor}{\AQIPittTom} AQI} & {\cellcolor[HTML]{\AQILCTomColor}{\AQILCTom} AQI} \\
+        \rowcolor[HTML]{F2FDFE} {\AQIDateTom}& {\cellcolor[HTML]{\AQIPittTomColor}{\AQIPittTom} AQI} & {\cellcolor[HTML]{\AQILCTomColor}{\AQILCTom} AQI} \\
         
         \hline
       \end{tabular}
       \caption{Please refer the Air Quality Index guide}
     \end{table}
 
+    % forecast section
     \heading{Today’s Forecast:}
     \Discriptions
     
@@ -151,23 +166,37 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
 
     \href{https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast_home.aspx}{\underline{Data provided by the PA Department of Environmental Protection}}
 
-  \end{block}
-
-    \begin{block}{ACHD Surface Temperature Inversion Report}
+  \end{block} 
+  % here, we end the first block of  "Air Quality Forecast"
+  
+  % here, we start the second block
+  \begin{block}{ACHD Surface Temperature Inversion Report}
 
     \textit{This is the 7 AM surface-based temperature inversion report for Allegheny County.}
 
-    This morning’s surface inversion of \underline{\textbf{$\sim$\Temp}} with a depth of \underline{\textbf{$\sim$\Depth}} is estimated to break at \underline{\textbf{\Time}} . This surface inversion can be characterized as: \underline{\textbf{\Scale}} (None / Slight / Weak / Moderate / Strong. \Inversion
+    % first line of inversion report
+    This morning’s surface inversion of \underline{\textbf{$\sim$\Temp}} with a depth of \underline{\textbf{$\sim$\Depth}} is estimated to break at \underline{\textbf{\Time}}. 
+    
+    % second line of inversion report
+    This surface inversion can be characterized as: \underline{\textbf{\Scale}} (None / Slight / Weak / Moderate / Strong. 
+    
+    % third line of inversion report
+    \Inversion
 
   \end{block}
-  
+  % here, we end the second block
 
-\end{column}
+\end{column} 
+% here, we end the left column
 
 \separatorcolumn
+% use this to separate between columns
 
+
+% here, we begin the right column
 \begin{column}{\colwidth}
 
+  % here, we begin the block for ACHD Air Dispersion 36-Hour Forecast
   \begin{block}{ACHD Air Dispersion 36-Hour Forecast}
 
     This is the dispersion forecast for Allegheny County starting from this morning through tomorrow afternoon. The atmospheric dispersion index is a rating of the atmosphere’s ability to transport pollution away from its source and is based on emissions and weather. Better atmospheric dispersion can improve air quality.
@@ -198,8 +227,12 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
     Chance of rain this morning and rain likely tomorrow. Also, the sounding data from the National Weather Service was unavailable, so I had to use an alternative source.
     
     Data provided by the National Weather Service (NWS)
-    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{\underline{Fire Weather Planning Forecast}} and \href{http://weather.uwyo.edu/upperair/sounding.html}{\underline{PIT NWS Products}}
-
+    \href{https://forecast.weather.gov/product.php?site=NWS&product=FWF&issuedby=PBZ}{\underline{Fire Weather Planning Forecast}} and \href{http://weather.uwyo.edu/upperair/sounding.html}{\underline{PIT NWS Products}} 
+    % include the hyper link:
+    %\href{"link for the website"}{\underline{"show the word/sentence"}}
+    % use \url{} command to display the actual link
+    
+    
     \begin{table}
       \renewcommand{\arraystretch}{1.5}
       \centering
@@ -221,33 +254,36 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
 
     A surface temperature inversion is a weather pattern that stops mixing of the air near the ground, and pollution released into the air tends to remain at higher concentrations.
     
+    % here, we divide this block into 2 columns
     \begin{columns}[T]
-    \begin{column}{0.43\linewidth}
-    ~\includegraphics[width=1\textwidth]{citypic.png}
-    \end{column}
-    \begin{column}{0.5\linewidth}
     
-        Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
+        % the left column for the picture
+        \begin{column}{0.43\linewidth}
         
-        \textbf{Surface Temperature Inversion Characterization}
-            \begin{itemize}
-              \item 0-0.9 C°: Slight
-              \item 1-2.9 C°: Weak
-              \item 3-4.9 C°: Moderate
-              \item ≥5 C°: Strong
-            \end{itemize}
-    \end{column}
+        ~\includegraphics[width=1\textwidth]{citypic.png}
+        
+        \end{column}
+        
+        % the right column for the paragraph
+        \begin{column}{0.5\linewidth}
+        
+            Surface temperature inversion conditions include how strong the surface inversion is (in °C), how high the inversion is above the surface (in meters), and when the inversion is expected to break (in Eastern Standard Time). Also included is whether an upperlevel inversion or inversions exist, starting at about 1,000 meters.
+            
+            \textbf{Surface Temperature Inversion Characterization}
+                % use itemize for the list
+                \begin{itemize}
+                  \item 0-0.9 C°: Slight
+                  \item 1-2.9 C°: Weak
+                  \item 3-4.9 C°: Moderate
+                  \item ≥5 C°: Strong
+                \end{itemize}
+        \end{column}
+    
     \end{columns}    
 
 
   \end{block}
 
- % \begin{block}{References}
-%
- %   \nocite{*}
-  %  \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
-
- % \end{block}
 
 \end{column}
 
@@ -255,4 +291,10 @@ This is the daily forecasted Air Quality Index (AQI) for each area provided by t
 \end{columns}
 \end{frame}
 \end{document}
+
+
+
+
+
+
 
