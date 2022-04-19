@@ -476,7 +476,9 @@ if(is_empty(table6)==FALSE){
     } else return("Strong")
   }
 } else{
-  sixout<-"--"
+  sixout<-function(x){
+    return("N/A")
+  }
 }
 # generate current system time for report's title
 currentDate <- Sys.Date()
