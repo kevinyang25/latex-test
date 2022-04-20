@@ -3,7 +3,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: "*/4 11-12 * * *"
+    - cron: "*/4 12-13 * * *"
 
 jobs:
   generate-data:
