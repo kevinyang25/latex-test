@@ -256,6 +256,26 @@ if(is_empty(table4)==FALSE){
     altomdesc<-"Very Poor"
   }
   
+  if(is.na(adiearlytonight)==TRUE){
+    aetonvalue<-0
+    aetondesc<-"Very Poor"
+  }
+  
+  if(is.na(adilatetonight)==TRUE){
+    altonvalue<-0
+    altondesc<-"Very Poor"
+  }
+  
+  if(is.na(adiearlytoday)==TRUE){
+    aetodvalue<-0
+    aetoddesc<-"Very Poor"
+  }
+  
+  if(is.na(adilatetoday)==TRUE){
+    altodvalue<-0
+    altoddesc<-"Very Poor"
+  }
+  
   # These if-else statements change the descriptions of the ADIs if 
   # they are "Gen Poor" or "Gen Good" to "Generally Poor" or "Generally Good"
   
