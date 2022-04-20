@@ -74,6 +74,17 @@ if(is_empty(LC)==FALSE){
   tomorrowLC<-"--"
 }
 
+# color code function of AQI
+aqi_color<-function(x){
+  if (x == "Good"){
+    "6AFE19"
+  } else if (x == "Moderate"){
+    "FFF421"
+  } else if (x == "Unhealthy for Sensitive Groups"){
+    "FF6A20"
+  } else "FF2121" 
+}
+
 
 # website 2
 #
@@ -245,7 +256,9 @@ if(is_empty(table4)==FALSE){
     altomdesc<-"Very Poor"
   }
   
-  # These if-else statements change the descriptions of the ADIs if they are "Gen Poor" or "Gen Good" to "Generally Poor" or "Generally Good"
+  # These if-else statements change the descriptions of the ADIs if 
+  # they are "Gen Poor" or "Gen Good" to "Generally Poor" or "Generally Good"
+  
   if(aetoddesc=="Gen Poor"){
     aetoddesc<-"Generally Poor"
   } else if (aetoddesc=="Gen Good"){
@@ -297,17 +310,21 @@ if(is_empty(table4)==FALSE){
   tomorrowafternoon<-"--"
 }
 # Website 5
-# Data is scaraped here to calculate the Inversion Strength and Inversion Depths for the day
+# Data is scraped here to calculate the Inversion Strength and Inversion Depths for the day
 # Website is updated at 7AM every day
 
+# if the hour is before 8 am
 if (as.numeric(h)<8){
   yesterday<-strptime(with_tz(Sys.Date()-1,tzone="US/Eastern"),"%Y-%m-%d") # Using yesterday's date if website hasn't updated yet
   y5<-as.character(format(yesterday,"%Y"))
   m5<-as.character(format(yesterday,"%m"))
   d5<-as.character(format(yesterday,"%d"))
-  link5<-paste("http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=",y5,"&MONTH=",m5,"&FROM=",d5,"12&TO=",d5,"12&STNM=72520",sep="") # Place the year, month, and day values into the link to get the data for the day
+  # Place the year, month, and day values into the link to get the data for the day
+  link5<-paste("http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=",y5,
+               "&MONTH=",m5,"&FROM=",d5,"12&TO=",d5,"12&STNM=72520",sep="") 
 } else {
-  link5<-paste("http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=",y,"&MONTH=",m,"&FROM=",d,"12&TO=",d,"12&STNM=72520",sep="")
+  link5<-paste("http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=",y,
+               "&MONTH=",m,"&FROM=",d,"12&TO=",d,"12&STNM=72520",sep="")
 }
 
 page5<-tryCatch(read_html(link5),error=function(y){return(c())})# Read link, return a blank vector if the website is down
@@ -331,6 +348,7 @@ fivestrength<-function(x){ # Create a description value for how strong the Surfa
   } else return("Strong")
 }
 
+# if the table is not empty
 if (is_empty(table5)==FALSE){
   fiveextract<-str_extract_all(table5,'\\n.{22}') # Extracts and splits each row of data
   fivenum<-fiveextract[[1]][-c(1:4)] # Removes the first four rows
@@ -368,6 +386,7 @@ if (is_empty(table5)==FALSE){
   e<-which(tempdiffunder1k<0) # Find any differences less than 0
   f<-diff(e) # Make second differenced list
   g<-which(f>1) # Find any values greater than 1
+  
   upperinversion<-function(){ # Function to detect any inversion that is not a surface inversion and print "Yes" or "No"
     if (is.na(tempdiffunder1k[e[g[1]+1]])){
       return("No upper inversion starting below ~1000 m is reported")
@@ -375,6 +394,7 @@ if (is_empty(table5)==FALSE){
   }
   
   inversion5 <- upperinversion()
+  
 } else {
   link5<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&latest=latest&start_year=",y,"&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d),"&start_hour=",h,"&start_min=0&n_hrs=1.0&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&start=latest",sep="")
   page5<-read_html(link5) # Read link
@@ -452,14 +472,23 @@ if (is_empty(table5)==FALSE){
     mode<-"N/A because data could not be collected today"
   }
 }
+
+# --------------------------------------------------------------------------------------------------------------------------
 # Website 6
 # Used to calculate the Inversion Strength for the next day
 # Website is updated at 7AM every day 
+# --------------------------------------------------------------------------------------------------------------------------
 
 if (as.numeric(h)<8){
-  link6<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&start_year=",y,"&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d),"&start_hour=12&start_min=0&n_hrs=1&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&startSecs=",as.numeric(as.POSIXct(Sys.Date()))+30000,"&endSecs=",as.numeric(as.POSIXct(Sys.Date()))+33600,sep="") # Link with the system's year, month, day, and epoch times
+  link6<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&start_year=",y,
+               "&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d),
+               "&start_hour=12&start_min=0&n_hrs=1&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&startSecs=",
+               as.numeric(as.POSIXct(Sys.Date()))+30000,"&endSecs=",as.numeric(as.POSIXct(Sys.Date()))+33600,sep="") # Link with the system's year, month, day, and epoch times
 } else {
-  link6<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&start_year=",y,"&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d)+1,"&start_hour=12&start_min=0&n_hrs=1&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&startSecs=",as.numeric(as.POSIXct(Sys.Date()+1))+43200,"&endSecs=",as.numeric(as.POSIXct(Sys.Date()+1))+46800,sep="")
+  link6<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&start_year=",y,
+               "&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d)+1,
+               "&start_hour=12&start_min=0&n_hrs=1&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&startSecs=",
+               as.numeric(as.POSIXct(Sys.Date()+1))+43200,"&endSecs=",as.numeric(as.POSIXct(Sys.Date()+1))+46800,sep="")
 }
 
 page6<-tryCatch(read_html(link6),error = function(y){return(c())}) # Read link, return a blank vector if the website is down
@@ -512,6 +541,10 @@ if(is_empty(table6)==FALSE){
     return("N/A")
   }
 }
+
+
+
+# --------------------------------------------------------------------------------------------------------------------------
 # generate current system time for report's title
 currentDate <- Sys.Date()
 title <- paste("Air Quality Forecast and Dispersion Outlook \\\\of Allegheny County, Pennsylvania for", as.character(currentDate))
@@ -550,6 +583,8 @@ adi <- data.frame(
 
 result = c(aqi,aqi_forecast,adi,temp5,depth5,time5,scale5,inversion5,title)
 
+# --------------------------------------------------------------------------------------------------------------------------
+# Use to generate the variables in the .tex files
 output = ""
 
 # From here, we are generating the .tex file, you can add any varibles you like by using the format below.
@@ -578,6 +613,14 @@ output = paste(output,AQI_LC_today_cate,sep="\n")
 
 AQI_LC_tom_cate = paste("\\newcommand\\AQILCTomCate{",result$Liberty.Clairton.Area[2],"}",sep="")
 output = paste(output,AQI_LC_tom_cate,sep="\n")
+
+AQI_pitt_today_color <- aqi_color(result$Pittsburgh.Area[1])
+
+AQI_pitt_tom_color <- aqi_color(result$Pittsburgh.Area[2])
+
+AQI_LC_today_color <- aqi_color(result$Liberty.Clairton.Area[1])
+
+AQI_LC_tom_color <- aqi_color(result$Liberty.Clairton.Area[2])
 
 discription = paste("\\newcommand\\Discriptions{",result[[4]][1],"}",sep="")
 output = paste(output,discription,sep="\n")
@@ -654,22 +697,6 @@ output = paste(output,Inversion,sep="\n")
 Title = paste("\\newcommand\\Title{",result[[14]][1],"}",sep="")
 output = paste(output,Title,sep="\n")
 
-# color code function
-aqi_color<-function(x){
-  if (x == "Good"){
-    "6AFE19"
-  } else if (x == "Moderate"){
-    "FFF421"
-  } else if (x == "Unhealthy for Sensitive Groups"){
-    "FF6A20"
-  } else "FF2121" 
-}
-
-AQI_pitt_today_color <- aqi_color(result$Pittsburgh.Area[1])
-AQI_pitt_tom_color <- aqi_color(result$Pittsburgh.Area[2])
-AQI_LC_today_color <- aqi_color(result$Liberty.Clairton.Area[1])
-AQI_LC_tom_color <- aqi_color(result$Liberty.Clairton.Area[2])
-
 AQI_pitt_today_color = paste("\\newcommand\\AQIPittTodayColor{",AQI_pitt_today_color,"}",sep="")
 output = paste(output,AQI_pitt_today_color,sep="\n")
 
@@ -695,7 +722,7 @@ output = paste(output,AQI_LC_today_Week,sep="\n")
 AQI_LC_tom_Week = paste("\\newcommand\\AQIWeekTom{",AQIWeekTom,"}",sep="")
 output = paste(output,AQI_LC_tom_Week,sep="\n")
 
-
+# write the output to the folder data-raw
 writeLines(output,paste0("data-raw/data_", make.names(h), ".tex"))
 
 
