@@ -345,7 +345,7 @@ if (is_empty(table5)==FALSE){
   five<-five[-1,] # Remove first row, since it has no temperature value
   
   # Calculation for Surface Inversion Strength and Inversion Depth
-  tempdiff<-diff(five[,3]) # Create a differenced list of the temperature column, each entry subtracted from the next
+  tempdiff<-diff(rle(five[,3])$values) # Create a differenced list of the temperature column, each entry subtracted from the next
   surfaceinversion<-five[which(tempdiff<0),3][1]-five[,3][1] # If the temperature increases as height increases, take the peak temperature and subtract it from the surface temperature to get Surface Inversion Strength
   uniquetempdiff<-unique(tempdiff)
   negativetempdiff<-which(uniquetempdiff<0)
@@ -364,7 +364,7 @@ if (is_empty(table5)==FALSE){
   
   # Determining if there are any upper inversions
   sentence<-five[which(five[,2]<1000),] # Take all temperature values below 1000 m
-  tempdiffunder1k<-diff(sentence[,3]) # Make differenced list
+  tempdiffunder1k<-diff(rle(sentence[,3])$values) # Make differenced list
   e<-which(tempdiffunder1k<0) # Find any differences less than 0
   f<-diff(e) # Make second differenced list
   g<-which(f>1) # Find any values greater than 1
@@ -397,20 +397,20 @@ if (is_empty(table5)==FALSE){
     five<-as.data.frame(cbind(type,as.numeric(pressure)/10,height,as.numeric(temp)/10,as.numeric(dewpoint)/10,winddirection,windspeed)) 
     
     colnames(five)<-c("Type","Pressure (mb)","Height (m)","Temperature (C)","Dew Point (C)","Wind Direction (Degrees)","Wind Speed (Knots)") # Give each column their names and units
-    tempdifffive<-diff(unlist(five[,4])) # Create a differenced list of the temperature column, each entry subtracted from the next
+    tempdifffive<-diff(rle(unlist(five[,4]))$values) # Create a differenced list of the temperature column, each entry subtracted from the next
     surfaceinversion<-five[which(tempdifffive<0),4][[1]]-unlist(five[,4])[1] # If the temperature increases as height increases, take the peak temperature and subtract it from the surface temperature to get Surface Inversion Strength
     unlistedfivetemp<-unlist(five[,4])
     unlistedfiveheight<-unlist(five[,3])
-    uniquetempdiff<-diff(unique(unlistedfivetemp))
+    uniquetempdiff<-diff(rle(unlistedfivetemp)$values)
     negativetempdiff<-which(uniquetempdiff<0)
-    matchedtempdiff<-unique(unlistedfivetemp)[negativetempdiff]
-    inversiondepth<-as.numeric(five[which(matchedtempdiff%in%unique(unlistedfivetemp))[negativetempdiff],3][1])-as.numeric(five[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
+    matchedtempdiff<-rle(unlistedfivetemp)$values[negativetempdiff]
+    inversiondepth<-as.numeric(five[which(matchedtempdiff%in%rle(unlistedfivetemp)$values)[negativetempdiff],3][1])-as.numeric(five[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
     
     breaktemp<-(((inversiondepth/100)+five[which(tempdifffive<0),4][[1]])*9/5)+32 # Take this number and match it to the weather forecast. The time of day when this temperature is reached is the break time.
     
     # Determining if there are any upper inversions
     sentence<-five[which(five[,3]<1000),] # Take all temperature values below 1000 m
-    tempdiffunder1k<-diff(unlist(sentence[,4])) # Make differenced list
+    tempdiffunder1k<-diff(rle(unlist(sentence[,4]))$values) # Make differenced list
     e<-which(tempdiffunder1k<0) # Find any differences less than 0
     f<-diff(e) # Make second differenced list
     g<-which(f>1) # Find any values greater than 1
@@ -487,14 +487,14 @@ if(is_empty(table6)==FALSE){
   six<-as.data.frame(cbind(type,as.numeric(pressure)/10,height,as.numeric(temp)/10,as.numeric(dewpoint)/10,winddirection,windspeed)) 
   
   colnames(six)<-c("Type","Pressure (mb)","Height (m)","Temperature (C)","Dew Point (C)","Wind Direction (Degrees)","Wind Speed (Knots)") # Give each column their names and units
-  tempdiffsix<-diff(unlist(six[,4])) # Create a differenced list of the temperature column, each entry subtracted from the next
+  tempdiffsix<-diff(rle(unlist(six[,4]))$values) # Create a differenced list of the temperature column, each entry subtracted from the next
   surfaceinversion2<-six[which(tempdiffsix<0),4][[1]]-unlist(six[,4])[1] # If the temperature increases as height increases, take the peak temperature and subtract it from the surface temperature to get Surface Inversion Strength
   unlistedsixtemp<-unlist(six[,4])
   unlistedsixheight<-unlist(six[,3])
-  uniquetempdiff<-diff(unique(unlistedsixtemp))
+  uniquetempdiff<-diff(rle(unlistedsixtemp)$values)
   negativetempdiff<-which(uniquetempdiff<0)
-  matchedtempdiff<-unique(unlistedsixtemp)[negativetempdiff]
-  inversiondepth2<-as.numeric(six[which(matchedtempdiff%in%unique(unlistedsixtemp))[negativetempdiff],3][1])-as.numeric(six[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
+  matchedtempdiff<-rle(unlistedsixtemp)$values[negativetempdiff]
+  inversiondepth2<-as.numeric(six[which(matchedtempdiff%in%rle(unlistedsixtemp)$values)[negativetempdiff],3][1])-as.numeric(six[,3][1]) # Take the height of the peak temperature and subtract the surface height (359 m) to get Inversion Depth
   
   sixout<-function(x){ # Create a description value for how strong the Surface Inversion Strength is based on its value
     if (x==0){
