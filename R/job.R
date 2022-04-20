@@ -27,10 +27,14 @@ h<-as.character(format(times,"%H")) # Extract and store the hour value
 # The content of the website would be updated at ___ everyday, and does not change until next update.
 # The source of the websites is the api of airnow.
 #
-webpage1_1 <- read_html("http://feeds.airnowapi.org/rss/forecast/113.xml")
-pitt = webpage1_1 %>%
-  html_nodes("body") %>%
-  html_text()
+webpage1_1 <- tryCatch(read_html("http://feeds.airnowapi.org/rss/forecast/113.xml"),error=function(y){return(c())})
+if (is_empty(webpage1_1)==FALSE){
+  pitt = webpage1_1 %>%
+    html_nodes("body") %>%
+    html_text()
+} else {
+  pitt<-c()
+}
 if (is_empty(pitt)==FALSE){
   todaypitt=str_extract(pitt,"(?<=Today).*?(?=AQI)")
   todaypitt=strsplit(todaypitt,"-")
@@ -48,10 +52,14 @@ if (is_empty(pitt)==FALSE){
   todaypitt<-"--"
   tomorrowpitt<-"--"
 }
-webpage1_2 <- read_html("http://feeds.airnowapi.org/rss/forecast/352.xml")
-LC = webpage1_2 %>%
-  html_nodes("body") %>%
-  html_text()
+webpage1_2 <- tryCatch(read_html("http://feeds.airnowapi.org/rss/forecast/352.xml"),error=function(y){return(c())})
+if (is_empty(webpage1_2)==FALSE){
+  LC = webpage1_2 %>%
+    html_nodes("body") %>%
+    html_text()
+} else{
+  LC<-c()
+}
 if(is_empty(LC)==FALSE){
   todayLC=str_extract(LC,"(?<=Today).*?(?=AQI)")
   todayLC=strsplit(todayLC,"-")
@@ -74,10 +82,14 @@ if(is_empty(LC)==FALSE){
 # The content of the website would be updated at ___ everyday, and does not change until next update.
 # The source of the website is the Pennsylvania Department of Environmental Protection.
 # 
-webpage2 <- read_html("https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast.aspx?vargroup=sw")
-todayforecast <- webpage2 %>%
-  html_nodes("body form div div div div div div") %>%
-  html_text()
+webpage2 <- tryCatch(read_html("https://www.ahs.dep.pa.gov/AQPartnersWeb/forecast.aspx?vargroup=sw"),error=function(y){return(c())})
+if (is_empty(webpage2)==FALSE){
+  todayforecast <- webpage2 %>%
+    html_nodes("body form div div div div div div") %>%
+    html_text()
+} else {
+  todayforecast<-c()
+}
 if(is_empty(todayforecast)==FALSE){
   head(todayforecast)
   discriptions = todayforecast[1]
@@ -96,13 +108,17 @@ if(is_empty(todayforecast)==FALSE){
 # The content in this website updates every hour, and only contains the information in the future.
 # Better be scraped in a fixed time daily(e.g.: 8:30 am)
 # 
-webpage4 <- read_html("https://forecast.weather.gov/MapClick.php?lat=40.427&lon=-80.0107&lg=english&&FcstType=digital")
+webpage4 <- tryCatch(read_html("https://forecast.weather.gov/MapClick.php?lat=40.427&lon=-80.0107&lg=english&&FcstType=digital"),error=function(y){return(c())})
 date = as.character(Sys.Date())
 date = strsplit(date,"-")
 date = paste(date[[1]][2],date[[1]][3],sep="/")
-p2 <- webpage4 %>%
-  html_nodes(xpath="/html/body/table[6]/tr/td") %>%
-  html_text()
+if(is_empty(webpage4)==FALSE){
+  p2 <- webpage4 %>%
+    html_nodes(xpath="/html/body/table[6]/tr/td") %>%
+    html_text()
+} else {
+  p2<-c()
+}
 if(is_empty(p2)==FALSE){
   p2 = p2[-c(1,402)]
   dim(p2) = c(25,32)
@@ -130,10 +146,14 @@ if(is_empty(p2)==FALSE){
 
 web4_1 = paste("https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&AheadHour=",9-time+15+9,"&Submit=Submit&FcstType=digital&textField1=40.427&textField2=-80.0107&site=all&unit=0&dd=&bw=",sep="")
 web4_2 = paste("https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&AheadHour=",9-time+24+15+9,"&Submit=Submit&FcstType=digital&textField1=40.427&textField2=-80.0107&site=all&unit=0&dd=&bw=",sep="")
-webpage4_1=read_html(web4_1)
-p4_1 <- webpage4_1 %>%
-  html_nodes(xpath="/html/body/table[6]/tr/td") %>%
-  html_text()
+webpage4_1=tryCatch(read_html(web4_1),error=function(y){return(c())})
+if (is_empty(webpage4_1)==FALSE){
+  p4_1 <- webpage4_1 %>%
+    html_nodes(xpath="/html/body/table[6]/tr/td") %>%
+    html_text()
+} else {
+  p4_1<-c()
+}
 
 if(is_empty(p4_1)==FALSE){
   p4_1 = p4_1[-c(1,402)]
@@ -149,10 +169,14 @@ if(is_empty(p4_1)==FALSE){
   todayeveningwind<-"--"
   todayovernightwind<-"--"
 }
-webpage4_2=read_html(web4_2)
-p4_2 <- webpage4_2 %>%
-  html_nodes(xpath="/html/body/table[6]/tr/td") %>%
-  html_text()
+webpage4_2=tryCatch(read_html(web4_2),error=function(y){return(c())})
+if (is_empty(webpage4_2)==FALSE){
+  p4_2 <- webpage4_2 %>%
+    html_nodes(xpath="/html/body/table[6]/tr/td") %>%
+    html_text()
+} else {
+  p4_2<-c()
+}
 
 if(is_empty(p4_2)==FALSE){
   p4_2 = p4_2[-c(1,402)]
@@ -175,10 +199,14 @@ if (as.numeric(h)>=4 & as.numeric(h)<12){
 }
 
 
-page4<-read_html(link4) # Read in correct website link
-table4<-page4 %>% # Select the node containing the data, in  this case, all of the tables on the site will be scraped at once
-  html_nodes(".glossaryProduct") %>%
-  html_text()
+page4<-tryCatch(read_html(link4),error=function(y){return(c())}) # Read in correct website link, return a blank vector if the website is down
+if (is_empty(page4)==FALSE){
+  table4<-page4 %>% # Select the node containing the data, in  this case, all of the tables on the site will be scraped at once
+    html_nodes(".glossaryProduct") %>%
+    html_text()
+} else {
+  table4<-c()
+}
 
 if(is_empty(table4)==FALSE){
   adiearly<-str_extract(table4,'ADI\\searly.{1,}') # Extract ADI Early row from the first table
@@ -282,10 +310,14 @@ if (as.numeric(h)<8){
   link5<-paste("http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=",y,"&MONTH=",m,"&FROM=",d,"12&TO=",d,"12&STNM=72520",sep="")
 }
 
-page5<-read_html(link5) # Read link
-table5<-page5 %>% # Extract the node containing the data, which is the whole table in this case
-  html_nodes("pre") %>%
-  html_text()
+page5<-tryCatch(read_html(link5),error=function(y){return(c())})# Read link, return a blank vector if the website is down
+if (is_empty(page5)==FALSE){
+  table5<-page5 %>% # Extract the node containing the data, which is the whole table in this case
+    html_nodes("pre") %>%
+    html_text()
+} else {
+  table5<-c()
+}
 
 fivestrength<-function(x){ # Create a description value for how strong the Surface Inversion Strength is based on its value
   if (x==0){
@@ -430,7 +462,7 @@ if (as.numeric(h)<8){
   link6<-paste("https://rucsoundings.noaa.gov/get_soundings.cgi?data_source=GFS&start_year=",y,"&start_month_name=",month.abb[as.numeric(m)],"&start_mday=",as.numeric(d)+1,"&start_hour=12&start_min=0&n_hrs=1&fcst_len=shortest&airport=PIT&text=Ascii%20text%20%28GSL%20format%29&hydrometeors=false&startSecs=",as.numeric(as.POSIXct(Sys.Date()+1))+43200,"&endSecs=",as.numeric(as.POSIXct(Sys.Date()+1))+46800,sep="")
 }
 
-page6<-tryCatch(read_html(link6),error = function(y){return(c())}) # Read link
+page6<-tryCatch(read_html(link6),error = function(y){return(c())}) # Read link, return a blank vector if the website is down
 if (is_empty(page6)==FALSE){
 table6<-page6 %>% # Select nodes with the needed data which is the full table
   html_nodes("p") %>%
