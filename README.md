@@ -11,6 +11,7 @@ Anything in this repository can be updated by 'commits' including the main.tex a
 * [Workflow files](#workflow-files)
 * [Possible Errors](#possible-errors)
 * [Guidance for adding new functions](#guidance-for-adding-new-functions)
+* [Resources for LaTex](#resources-for-latex)
 
 ## Files
 <img width="786" alt="image" src="https://user-images.githubusercontent.com/89940553/163876583-0bc90d73-3eec-4903-8ac0-cec3da0523f0.png">
@@ -87,4 +88,13 @@ So for example, if you want to add a new variable with name "NewVariable", you s
 For example, you added the NewVariable to the .tex file then, you can use this variable in [main.tex](https://github.com/Yuchengyw6/latex-test/blob/master/main.tex) like
 <img width="1126" alt="image" src="https://user-images.githubusercontent.com/89940553/163883322-599f909d-e334-4f67-8aba-5180fe6bd42d.png">.
 Please make sure the [data_X07.tex](https://github.com/Yuchengyw6/latex-test/blob/master/data-raw/data_X07.tex) is updated, and the NewVariable is inside, or errors might occur.
+
+## Resources for LaTex
+
+For the "Air Quality Forecast and Dispersion Outlook" report, we are using the template from https://www.overleaf.com/latex/templates/uq-beamerposter-template/svbpbndqdpqv.
+
+If you need more information and instrucitons on the Latex writing, it would be helpful to refer to the document provided by Overleaf: https://www.overleaf.com/learn.
+
+And, for more specific LaTex using in our report, please refer to https://github.com/Yuchengyw6/latex-test/blob/master/main.tex file, detailed comments and documentations are included.
+
 
