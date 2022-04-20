@@ -1,3 +1,8 @@
+% author: Naijia Liu
+% resource for the latex template: https://www.overleaf.com/latex/templates/uq-beamerposter-template/svbpbndqdpqv
+% please refer to https://www.overleaf.com/learn for more information and instructions
+% We are generating "Air Quality Forecast and Dispersion Outlook of Allegheny County, Pennsylvania" report using Latex
+
 
 % define the document class for the report: beamer
 % this can be useful if you find some latex grammar is not working
@@ -24,13 +29,14 @@
 \usepackage{tabularx}
 \usepackage{adjustbox}
 \usepackage{hyperref}
-\input{data-raw/data_X07}
-%\input{data-raw/data_X07}
 \definecolor{mycolor}{HTML}{000AFC}
 \hypersetup{
     colorlinks=true,
     urlcolor=mycolor
     }
+    
+% data input from the data_X07 file
+\input{data-raw/data_X07}
 
 % ====================
 % Lengths
@@ -38,11 +44,13 @@
 
 % If you have N columns, choose \sepwidth and \colwidth such that
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
+% there are 2 columns in the report
 \newlength{\sepwidth}
 \newlength{\colwidth}
 \setlength{\sepwidth}{0.03\paperwidth}
 \setlength{\colwidth}{0.45\paperwidth}
 
+% define the layout for the report
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
 % ====================
@@ -53,7 +61,8 @@
 \title{\Title}
 
 \author{Allegheny County Health Department}
-% this is the line that is under the "Allegheny County Health Department"
+
+% this is the invisible line that is under the "Allegheny County Health Department"
 % we are not exactly using this line of code
 % !!DO NOT DELETE IT!!
 % or the code will report an error
@@ -100,9 +109,17 @@
 \begin{columns}[t]
 \separatorcolumn
 
+% =============
+% Left Column
+% =============
+
 \begin{column}{\colwidth}
-  % here, we start the first block of  "Air Quality Forecast"
-  \begin{block}{Air Quality Forecast}% block name
+
+% ========================================
+% First block of  "Air Quality Forecast"
+% ========================================
+
+  \begin{block}{Air Quality Forecast} % block name
     This is the daily forecasted Air Quality Index (AQI) for each area provided by the PA Department of Environmental Protection. The AQI is based on PM2.5 or Ozone, whichever is forecasted to be higher.
    
     % the functions these tables uses
@@ -169,7 +186,10 @@
   \end{block} 
   % here, we end the first block of  "Air Quality Forecast"
   
-  % here, we start the second block
+% ============================================================
+% Second block of "ACHD Surface Temperature Inversion Report"
+% ============================================================
+
   \begin{block}{ACHD Surface Temperature Inversion Report}
 
     \textit{This is the 7 AM surface-based temperature inversion report for Allegheny County.}
@@ -193,10 +213,16 @@
 % use this to separate between columns
 
 
-% here, we begin the right column
+% =============
+% Right Column
+% =============
+
 \begin{column}{\colwidth}
 
-  % here, we begin the block for ACHD Air Dispersion 36-Hour Forecast
+% =======================================================
+% Third block of "ACHD Air Dispersion 36-Hour Forecast"
+% =======================================================
+
   \begin{block}{ACHD Air Dispersion 36-Hour Forecast}
 
     This is the dispersion forecast for Allegheny County starting from this morning through tomorrow afternoon. The atmospheric dispersion index is a rating of the atmosphere’s ability to transport pollution away from its source and is based on emissions and weather. Better atmospheric dispersion can improve air quality.
@@ -249,6 +275,10 @@
 
   \end{block}
 
+
+% =========================================================================
+% Forth block of "What does the Surface Temperature Inversion Report mean"
+% =========================================================================
 
   \begin{block}{What does the Surface Temperature Inversion Report mean}
 
