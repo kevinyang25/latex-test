@@ -4,7 +4,7 @@ This repository is adapted from the GitHub action for [compiling a LaTeX documen
 
 Thanks a lot to [Cheng Xu](https://github.com/xu-cheng) for his repo https://github.com/xu-cheng/latex-action and thanks a lot to the instruction written by [David Haberthür](https://github.com/habi).
 
-Anything in this repository can be updated by 'commits' including the main.tex and the pdf report will be automatically generated again [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages). 
+Please note that anything in this repository can be updated by 'commits' including the main.tex and the **pdf report will be automatically generated again** [gh-pages](https://github.com/Yuchengyw6/latex-test/tree/gh-pages). 
 
 ## Table of Contents
 * [Files](#files)
